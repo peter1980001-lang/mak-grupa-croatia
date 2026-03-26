@@ -56,6 +56,13 @@ html, body {
     gap: 0.9rem !important;
   }
 
+  /* Tall content slides: make the glass card scrollable instead of overflowing */
+  .mobile-scroll {
+    max-height: 88svh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
   /* Tighten up hero subtitle */
   .hero-subtitle {
     bottom: 12% !important;

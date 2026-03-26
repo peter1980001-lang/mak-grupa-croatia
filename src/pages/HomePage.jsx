@@ -320,7 +320,7 @@ export default function HomePage() {
           PDF p.37–41
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-partnership" zIndex={16} height="200vh">
-        <GlassBox style={{ maxWidth: '860px', padding: '3rem 3.5rem' }}>
+        <GlassBox className="mobile-scroll" style={{ maxWidth: '860px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Model javno-privatnog partnerstva</p>
           <h2 style={{ ...T.h2, marginBottom: '2.2rem' }}>
             Zajedno gradimo<br />
@@ -330,7 +330,7 @@ export default function HomePage() {
           {/* PPP structure */}
           <div style={{ background: 'rgba(201,168,76,0.05)', borderRadius: '12px', padding: '1.4rem 1.6rem', marginBottom: '1.8rem' }}>
             <p style={{ ...T.h3, color: '#c9a84c', marginBottom: '1rem' }}>Podjela uloga</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.2rem' }}>
+            <div className="mobile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.2rem' }}>
               {[
                 { role: 'Grad Varaždin', items: ['Osigurava prostor', 'Regulatorni okvir i nadzor', 'Bez financijskog izlaganja'] },
                 { role: 'M.A.K Grupa', items: ['Razvoj i financiranje', 'Operativno upravljanje', 'Preuzima sav operativni rizik'] },
@@ -348,7 +348,7 @@ export default function HomePage() {
 
           {/* City benefits */}
           <p style={{ ...T.h3, color: '#c9a84c', marginBottom: '1rem' }}>Koristi za Grad Varaždin</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.8rem' }}>
+          <div className="mobile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.8rem' }}>
             {[
               { title: 'Gospodarski učinak', items: ['Rast lokalne potrošnje', 'Poticanje poduzetništva', 'Nova radna mjesta'] },
               { title: 'Turistički učinak', items: ['Jačanje pozicije Varaždina', 'Privlačenje regionalnih posjetitelja', 'Dulji boravak gostiju'] },
@@ -366,7 +366,7 @@ export default function HomePage() {
           <div style={T.divider} />
 
           {/* Regional + community */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.4rem' }}>
+          <div className="mobile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.4rem' }}>
             <div>
               <p style={{ ...T.h3, marginBottom: '0.7rem' }}>Varaždin kao regionalna destinacija</p>
               <p style={{ ...T.body, marginBottom: '0.8rem' }}>Primarno tržište: Zagreb · Sjever Hrvatske · Slovenija · Austrija</p>
