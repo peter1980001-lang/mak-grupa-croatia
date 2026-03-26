@@ -1,7 +1,7 @@
 // src/components/GlassBox.jsx — reusable glassmorphism container
-export default function GlassBox({ children, style }) {
+export default function GlassBox({ children, style, className = '' }) {
   return (
-    <div style={{
+    <div className={`glass-card ${className}`} style={{
       background: 'rgba(6, 9, 6, 0.52)',
       backdropFilter: 'blur(22px)',
       WebkitBackdropFilter: 'blur(22px)',

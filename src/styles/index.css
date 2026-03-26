@@ -10,3 +10,59 @@ html, body {
   background: #191a16;
   overflow-x: hidden;
 }
+
+/* ── Mobile portrait optimizations ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+
+  /* All animated-slide cards: anchor to bottom, full width */
+  .slide-card {
+    bottom: 5% !important;
+    left: 5% !important;
+    right: 5% !important;
+    top: auto !important;
+    transform: none !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+
+  /* Center-aligned cards (Vision, Phase5) use left:50%+translateX — normalize */
+  .slide-card--center {
+    left: 5% !important;
+    transform: none !important;
+    text-align: left !important;
+    width: auto !important;
+  }
+
+  /* Right-aligned card (Phase4) — normalize bullet direction */
+  .slide-card--right {
+    right: 5% !important;
+    text-align: left !important;
+  }
+  .slide-card--right li {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+  }
+  .slide-card--right li span { order: -1 !important; }
+
+  /* Reduce GlassBox padding on small screens */
+  .glass-card {
+    padding: 1.4rem 1.6rem !important;
+    border-radius: 12px !important;
+  }
+
+  /* Static slides: collapse multi-column grids to single column */
+  .mobile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.9rem !important;
+  }
+
+  /* Tighten up hero subtitle */
+  .hero-subtitle {
+    bottom: 12% !important;
+    font-size: clamp(0.6rem, 3.5vw, 0.85rem) !important;
+    letter-spacing: 0.15em !important;
+    white-space: normal !important;
+    text-align: center !important;
+    padding: 0 1.5rem !important;
+  }
+}

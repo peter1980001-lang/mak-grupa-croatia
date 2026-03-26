@@ -22,7 +22,7 @@ export default function AquaCityLocation() {
 
   return (
     <div data-section="aquacity-location">
-      <CanvasSection name="aquacity-location" totalFrames={144} height="320vh" zIndex={5}>
+      <CanvasSection name="aquacity-location" totalFrames={144} height="320vh" zIndex={5} focusX={0.3}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)',
@@ -31,7 +31,7 @@ export default function AquaCityLocation() {
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 35%)',
         }} />
-        <div ref={cardRef} style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '520px', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '520px', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',

@@ -22,12 +22,12 @@ export default function AquaCityIntro() {
 
   return (
     <div data-section="aquacity-intro">
-      <CanvasSection name="aquacity-intro" totalFrames={144} height="320vh" zIndex={2}>
+      <CanvasSection name="aquacity-intro" totalFrames={144} height="320vh" zIndex={2} focusX={0.35}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.25) 100%)',
         }} />
-        <div ref={cardRef} style={{ position: 'absolute', bottom: '12%', left: '8%', maxWidth: '640px', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '12%', left: '8%', maxWidth: '640px', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)',

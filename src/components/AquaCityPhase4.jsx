@@ -25,7 +25,7 @@ export default function AquaCityPhase4() {
 
   return (
     <div data-section="aquacity-phase4">
-      <CanvasSection name="aquacity-phase4" totalFrames={167} height="320vh" zIndex={13}>
+      <CanvasSection name="aquacity-phase4" totalFrames={167} height="320vh" zIndex={13} focusX={0.65}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%)',
@@ -40,7 +40,7 @@ export default function AquaCityPhase4() {
           }}>Faza 4 · 2030</span>
         </div>
 
-        <div ref={cardRef} style={{ position: 'absolute', bottom: '12%', right: '8%', maxWidth: '500px', textAlign: 'right', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card slide-card--right" style={{ position: 'absolute', bottom: '12%', right: '8%', maxWidth: '500px', textAlign: 'right', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',

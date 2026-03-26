@@ -22,7 +22,7 @@ export default function AquaCityProblem() {
 
   return (
     <div data-section="aquacity-problem">
-      <CanvasSection name="aquacity-problem" totalFrames={144} height="340vh" zIndex={4}>
+      <CanvasSection name="aquacity-problem" totalFrames={144} height="340vh" zIndex={4} focusX={0.3}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05) 100%)',
@@ -32,7 +32,7 @@ export default function AquaCityProblem() {
           background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%)',
         }} />
 
-        <div ref={cardRef} style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '540px', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '540px', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',

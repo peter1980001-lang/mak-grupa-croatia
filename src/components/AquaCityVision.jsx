@@ -22,12 +22,12 @@ export default function AquaCityVision() {
 
   return (
     <div data-section="aquacity-vision">
-      <CanvasSection name="aquacity-vision2" totalFrames={186} height="320vh" zIndex={7}>
+      <CanvasSection name="aquacity-vision2" totalFrames={186} height="320vh" zIndex={7} focusX={0.45}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%)',
         }} />
-        <div ref={cardRef} style={{
+        <div ref={cardRef} className="slide-card slide-card--center" style={{
           position: 'absolute', bottom: '12%', left: '50%', transform: 'translateX(-50%)',
           textAlign: 'center', width: '80%', maxWidth: '700px', opacity: 0,
         }}>

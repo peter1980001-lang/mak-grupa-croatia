@@ -8,6 +8,11 @@ export default function CanvasSection({
   totalFrames,
   height = '320vh',
   zIndex = 1,
+  // focusX / focusY: 0 = left/top, 0.5 = center (default), 1 = right/bottom
+  // On portrait mobile the frame is wider than the viewport; these shift the
+  // visible crop area so the important part of each video stays on screen.
+  focusX = 0.5,
+  focusY = 0.5,
   children,
 }) {
   const containerRef = useRef(null)
@@ -35,7 +40,11 @@ export default function CanvasSection({
       const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight)
       const sw = img.naturalWidth  * scale
       const sh = img.naturalHeight * scale
-      ctx.drawImage(img, (cw - sw) / 2, (ch - sh) / 2, sw, sh)
+      // Focal-point offset: clamp so the image never draws outside canvas
+      const x = Math.min(0, Math.max(cw - sw, (cw - sw) * focusX))
+      const y = Math.min(0, Math.max(ch - sh, (ch - sh) * focusY))
+      ctx.clearRect(0, 0, cw, ch)
+      ctx.drawImage(img, x, y, sw, sh)
     }
 
     for (let i = 0; i < totalFrames; i++) {
@@ -57,7 +66,7 @@ export default function CanvasSection({
       },
     })
 
-    // Fade in 0→3%, brief fade out 96→100% (black cut between sections)
+    // Fade in 0→3%, fade out 96→100%
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -75,7 +84,7 @@ export default function CanvasSection({
       ScrollTrigger.getAll().forEach((t) => t.kill())
       window.removeEventListener('resize', resize)
     }
-  }, [name, totalFrames])
+  }, [name, totalFrames, focusX, focusY])
 
   return (
     <>

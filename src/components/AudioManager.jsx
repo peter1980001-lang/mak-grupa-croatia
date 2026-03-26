@@ -43,16 +43,16 @@ export default function AudioManager() {
       })
     }
 
-    // 'lenis:scroll' is dispatched by SmoothScroll on first Lenis scroll tick
+    // 'lenis:scroll' is dispatched by SmoothScroll on first Lenis scroll tick.
+    // touchstart is intentionally excluded — it fires on first tap before any
+    // scrolling intent, causing auto-start on mobile.
     window.addEventListener('lenis:scroll', start)
-    window.addEventListener('touchstart',   start, { passive: true })
     window.addEventListener('keydown',      start)
 
     return () => {
       audio.pause()
       audio.src = ''
       window.removeEventListener('lenis:scroll', start)
-      window.removeEventListener('touchstart',   start)
       window.removeEventListener('keydown',      start)
     }
   }, [])
