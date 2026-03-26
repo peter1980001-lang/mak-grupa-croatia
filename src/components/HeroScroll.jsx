@@ -2,24 +2,16 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Lenis from 'lenis'
 import logoSrc from '../assets/logo.jpeg'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export default function HeroScroll() {
   const containerRef = useRef(null)
+  const wrapperRef = useRef(null)
   const textRef = useRef(null)
   const logoRef = useRef(null)
   const subtitleRef = useRef(null)
 
   useEffect(() => {
-    const lenis = new Lenis()
-    lenis.on('scroll', ScrollTrigger.update)
-    const tick = (time) => lenis.raf(time * 1000)
-    gsap.ticker.add(tick)
-    gsap.ticker.lagSmoothing(0)
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -29,7 +21,7 @@ export default function HeroScroll() {
       },
     })
 
-    // Text: fade in 0→12%, hold, fade out 30→42%
+    // "Predstavlja": fade in 0→12%, fade out 30→42%
     tl.fromTo(textRef.current,
       { opacity: 0, y: 10 },
       { opacity: 1, y: 0, ease: 'none', duration: 0.12 },
@@ -47,19 +39,20 @@ export default function HeroScroll() {
       0.38
     )
 
-    // Subtitle: fade in 52→68%, slightly after logo becomes visible
+    // Subtitle: fade in 52→68%
     tl.fromTo(subtitleRef.current,
       { opacity: 0, y: 8 },
       { opacity: 1, y: 0, ease: 'none', duration: 0.16 },
       0.52
     )
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill())
-      lenis.off('scroll', ScrollTrigger.update)
-      gsap.ticker.remove(tick)
-      lenis.destroy()
-    }
+    // Whole section fades out 85→100% → hands off to next section
+    tl.to(wrapperRef.current,
+      { opacity: 0, ease: 'none', duration: 0.15 },
+      0.85
+    )
+
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
 
   return (
@@ -67,6 +60,7 @@ export default function HeroScroll() {
       <div ref={containerRef} style={{ height: '300vh' }} />
 
       <div
+        ref={wrapperRef}
         style={{
           position: 'fixed',
           inset: 0,
@@ -77,7 +71,6 @@ export default function HeroScroll() {
           zIndex: 0,
         }}
       >
-        {/* "Predstavlja" */}
         <p
           ref={textRef}
           style={{
@@ -95,7 +88,6 @@ export default function HeroScroll() {
           Predstavlja
         </p>
 
-        {/* Logo with radial vignette mask — fades into background */}
         <img
           ref={logoRef}
           src={logoSrc}
@@ -111,7 +103,6 @@ export default function HeroScroll() {
           }}
         />
 
-        {/* Subtitle — appears just after logo becomes visible */}
         <p
           ref={subtitleRef}
           style={{
