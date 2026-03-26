@@ -13,53 +13,51 @@ export default function HeroScroll() {
   const logoRef = useRef(null)
 
   useEffect(() => {
-    // Smooth scroll
     const lenis = new Lenis()
     lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => lenis.raf(time * 1000))
+    const tick = (time) => lenis.raf(time * 1000)
+    gsap.ticker.add(tick)
     gsap.ticker.lagSmoothing(0)
 
-    const container = containerRef.current
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: container,
+        trigger: containerRef.current,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1,
+        scrub: 1.2,
       },
     })
 
-    // "Predstavlja" fades in 0→25%, holds, fades out 50→65%
+    // Text: fade in 0→12%, hold, fade out 30→42%
     tl.fromTo(textRef.current,
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, ease: 'none', duration: 0.25 },
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, ease: 'none', duration: 0.12 },
       0
     )
     tl.to(textRef.current,
-      { opacity: 0, y: -12, ease: 'none', duration: 0.15 },
-      0.5
+      { opacity: 0, y: -10, ease: 'none', duration: 0.12 },
+      0.30
     )
 
-    // Logo fades in 55→85%
+    // Logo: fade in 38→65%
     tl.fromTo(logoRef.current,
-      { opacity: 0, scale: 0.94 },
-      { opacity: 1, scale: 1, ease: 'none', duration: 0.3 },
-      0.55
+      { opacity: 0, scale: 0.96 },
+      { opacity: 1, scale: 1, ease: 'none', duration: 0.27 },
+      0.38
     )
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())
-      gsap.ticker.remove((time) => lenis.raf(time * 1000))
+      lenis.off('scroll', ScrollTrigger.update)
+      gsap.ticker.remove(tick)
       lenis.destroy()
     }
   }, [])
 
   return (
     <>
-      {/* Scroll container — drives the timeline */}
-      <div ref={containerRef} style={{ height: '350vh' }} />
+      <div ref={containerRef} style={{ height: '300vh' }} />
 
-      {/* Fixed viewport */}
       <div
         style={{
           position: 'fixed',
@@ -71,16 +69,16 @@ export default function HeroScroll() {
           zIndex: 0,
         }}
       >
-        {/* "Predstavlja" text */}
+        {/* "Predstavlja" */}
         <p
           ref={textRef}
           style={{
             position: 'absolute',
             color: '#ffffff',
-            fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+            fontSize: 'clamp(0.85rem, 2vw, 1.25rem)',
             fontFamily: 'system-ui, sans-serif',
             fontWeight: 300,
-            letterSpacing: '0.35em',
+            letterSpacing: '0.4em',
             textTransform: 'uppercase',
             opacity: 0,
             userSelect: 'none',
@@ -89,17 +87,19 @@ export default function HeroScroll() {
           Predstavlja
         </p>
 
-        {/* Logo */}
+        {/* Logo with radial vignette mask — fades into background */}
         <img
           ref={logoRef}
           src={logoSrc}
           alt="MAK Grupa"
           style={{
             position: 'absolute',
-            width: 'clamp(280px, 40vw, 580px)',
+            width: 'clamp(280px, 42vw, 600px)',
             opacity: 0,
             userSelect: 'none',
             pointerEvents: 'none',
+            maskImage: 'radial-gradient(ellipse 62% 68% at 50% 50%, black 35%, transparent 80%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 62% 68% at 50% 50%, black 35%, transparent 80%)',
           }}
         />
       </div>
