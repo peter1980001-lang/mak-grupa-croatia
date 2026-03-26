@@ -13,6 +13,7 @@ import AquaCityPhase5    from '../components/AquaCityPhase5'
 import StaticSlide       from '../components/StaticSlide'
 import GlassBox          from '../components/GlassBox'
 import logoSrc           from '../assets/logo.jpeg'
+import AudioManager      from '../components/AudioManager'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -64,6 +65,7 @@ function Card({ title, body }) {
 export default function HomePage() {
   return (
     <SmoothScroll>
+      <AudioManager />
 
       {/* ══════════════════════════════════════════════════════════════════════
           SLIDE 1–2  |  Hero + Intro cinematic  |  z 0–2
