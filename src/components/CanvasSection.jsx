@@ -57,19 +57,19 @@ export default function CanvasSection({
       },
     })
 
-    // Fade in only — no fade out (next section covers this one via z-index)
-    gsap.fromTo(wrapperRef.current,
-      { opacity: 0 },
-      {
-        opacity: 1, ease: 'none', duration: 0.03,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1.2,
-        },
-      }
-    )
+    // Fade in 0→3%, brief fade out 96→100% (black cut between sections)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.2,
+      },
+    })
+    tl.fromTo(wrapperRef.current,
+      { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.03 }, 0)
+    tl.to(wrapperRef.current,
+      { opacity: 0, ease: 'none', duration: 0.04 }, 0.96)
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())
