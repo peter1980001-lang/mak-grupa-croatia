@@ -14,6 +14,7 @@ import StaticSlide       from '../components/StaticSlide'
 import GlassBox          from '../components/GlassBox'
 import logoSrc           from '../assets/logo.jpeg'
 import AudioManager      from '../components/AudioManager'
+import AutoPlay         from '../components/AutoPlay'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -66,6 +67,7 @@ export default function HomePage() {
   return (
     <SmoothScroll>
       <AudioManager />
+      <AutoPlay />
 
       {/* ══════════════════════════════════════════════════════════════════════
           SLIDE 1–2  |  Hero + Intro cinematic  |  z 0–2
