@@ -31,7 +31,7 @@ export default function AquaCityPhase3() {
 
   return (
     <div data-section="aquacity-phase3">
-      <CanvasSection name="aquacity-phase3" totalFrames={174} height="320vh" zIndex={10}>
+      <CanvasSection name="aquacity-phase3" totalFrames={174} height="320vh" zIndex={12}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.05) 100%)',
