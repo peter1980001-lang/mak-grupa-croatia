@@ -46,10 +46,10 @@ export default function HeroScroll() {
       0.52
     )
 
-    // Whole section fades out 85→100% → hands off to next section
+    // Whole section fades out 95→100%
     tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: 0.15 },
-      0.85
+      { opacity: 0, ease: 'none', duration: 0.05 },
+      0.95
     )
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())

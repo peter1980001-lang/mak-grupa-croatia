@@ -4,9 +4,9 @@
 //
 // Outputs: public/frames/<output-name>/frame_0001.jpg ... frame_NNNN.jpg
 
-const { execFileSync } = require('child_process')
-const { mkdirSync }    = require('fs')
-const path             = require('path')
+const { execFileSync }       = require('child_process')
+const { mkdirSync, rmSync } = require('fs')
+const path                  = require('path')
 const ffmpegPath       = require('@ffmpeg-installer/ffmpeg').path
 
 const [,, input, name] = process.argv
@@ -16,6 +16,8 @@ if (!input || !name) {
 }
 
 const outDir = path.join(__dirname, '..', 'public', 'frames', name)
+// Always clear old frames first so no leftover files remain
+rmSync(outDir, { recursive: true, force: true })
 mkdirSync(outDir, { recursive: true })
 
 console.log(`Extracting frames from "${input}" → public/frames/${name}/`)
@@ -27,4 +29,6 @@ execFileSync(ffmpegPath, [
   path.join(outDir, 'frame_%04d.jpg'),
 ], { stdio: 'inherit' })
 
-console.log('Done.')
+const { readdirSync } = require('fs')
+const count = readdirSync(outDir).length
+console.log(`Done. ${count} frames extracted → update totalFrames={${count}} in the component.`)

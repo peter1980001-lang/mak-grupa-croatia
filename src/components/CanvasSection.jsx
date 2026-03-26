@@ -20,8 +20,8 @@ export default function CanvasSection({
   height = '320vh',
   children,
   onProgress,
-  fadeIn  = [0, 0.08],
-  fadeOut = [0.88, 1.0],
+  fadeIn  = [0, 0.03],
+  fadeOut = [0.95, 1.0],
 }) {
   const containerRef = useRef(null)
   const wrapperRef   = useRef(null)
