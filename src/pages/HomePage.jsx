@@ -12,6 +12,7 @@ import AquaCityPhase4    from '../components/AquaCityPhase4'
 import AquaCityPhase5    from '../components/AquaCityPhase5'
 import StaticSlide       from '../components/StaticSlide'
 import GlassBox          from '../components/GlassBox'
+import logoSrc           from '../assets/logo.jpeg'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -419,34 +420,50 @@ export default function HomePage() {
           PDF p.43
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-contact" zIndex={18} height="150vh">
-        <GlassBox style={{ maxWidth: '640px', textAlign: 'center', padding: '3rem 3.5rem' }}>
-          <p style={T.label}>Zaključak</p>
-          <h2 style={{ ...T.h2, fontSize: 'clamp(2rem, 3.8vw, 3.2rem)', marginBottom: '1.4rem' }}>
-            AquaCity ima potencijal postati<br />
-            <span style={T.gold}>ključna točka razvoja Varaždina</span>
-          </h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', marginBottom: '1.8rem' }}>
-            {['Fazan', 'Kontroliran', 'Financijski održiv'].map(t => (
-              <div key={t} style={{ textAlign: 'center' }}>
-                <span style={{ color: '#c9a84c', fontSize: '1rem', display: 'block', marginBottom: '0.3rem' }}>◈</span>
-                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 300, margin: 0 }}>{t}</p>
-              </div>
-            ))}
-          </div>
-          <div style={{ borderTop: '1px solid rgba(201,168,76,0.3)', paddingTop: '1.8rem' }}>
-            <p style={{ color: '#ffffff', fontSize: 'clamp(1.1rem, 1.7vw, 1.3rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 400, margin: '0 0 0.3rem 0' }}>Mario Kukec</p>
-            <p style={{ ...T.body, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)', marginBottom: '1.2rem' }}>Direktor · M.A.K Grupa d.o.o.</p>
-            <p style={{ ...T.body, lineHeight: 2, color: 'rgba(255,255,255,0.65)' }}>
-              <span style={T.gold}>mario@makgrupa.com</span><br />
-              +971 55 129 1080<br />
-              www.makgrupa.com
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.8rem', width: '100%', maxWidth: '700px', padding: '0 2rem' }}>
+
+          {/* Logo — prominent, same treatment as hero */}
+          <img
+            src={logoSrc}
+            alt="MAK Grupa"
+            style={{
+              width: 'clamp(220px, 32vw, 420px)',
+              userSelect: 'none',
+              pointerEvents: 'none',
+              maskImage: 'radial-gradient(ellipse 62% 68% at 50% 50%, black 35%, transparent 80%)',
+              WebkitMaskImage: 'radial-gradient(ellipse 62% 68% at 50% 50%, black 35%, transparent 80%)',
+            }}
+          />
+
+          {/* Conclusion card */}
+          <GlassBox style={{ width: '100%', textAlign: 'center', padding: '2.4rem 3rem' }}>
+            <p style={T.label}>Zaključak</p>
+            <h2 style={{ ...T.h2, fontSize: 'clamp(1.8rem, 3.2vw, 2.8rem)', marginBottom: '1.4rem' }}>
+              AquaCity ima potencijal postati<br />
+              <span style={T.gold}>ključna točka razvoja Varaždina</span>
+            </h2>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', marginBottom: '1.8rem' }}>
+              {['Fazan', 'Kontroliran', 'Financijski održiv'].map(t => (
+                <div key={t} style={{ textAlign: 'center' }}>
+                  <span style={{ color: '#c9a84c', fontSize: '1rem', display: 'block', marginBottom: '0.3rem' }}>◈</span>
+                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 300, margin: 0 }}>{t}</p>
+                </div>
+              ))}
+            </div>
+            <div style={{ borderTop: '1px solid rgba(201,168,76,0.3)', paddingTop: '1.6rem' }}>
+              <p style={{ color: '#ffffff', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 400, margin: '0 0 0.25rem 0' }}>Mario Kukec</p>
+              <p style={{ ...T.body, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)', marginBottom: '1.1rem' }}>Direktor · M.A.K Grupa d.o.o.</p>
+              <p style={{ ...T.body, lineHeight: 2.2, color: 'rgba(255,255,255,0.65)' }}>
+                <span style={T.gold}>mario@makgrupa.com</span><br />
+                +971 55 129 1080 · www.makgrupa.com
+              </p>
+            </div>
+            <p style={{ ...T.body, fontSize: 'clamp(0.55rem, 0.8vw, 0.68rem)', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', marginTop: '1.4rem' }}>
+              Koncept, dizajn i prava razvoja u vlasništvu M.A.K Grupe | 2026
             </p>
-          </div>
-          <div style={T.divider} />
-          <p style={{ ...T.body, fontSize: 'clamp(0.6rem, 0.85vw, 0.72rem)', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em' }}>
-            Koncept, dizajn i prava razvoja u vlasništvu M.A.K Grupe | 2026
-          </p>
-        </GlassBox>
+          </GlassBox>
+
+        </div>
       </StaticSlide>
 
     </SmoothScroll>

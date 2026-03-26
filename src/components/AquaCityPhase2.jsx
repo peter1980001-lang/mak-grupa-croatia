@@ -1,4 +1,4 @@
-// src/components/AquaCityPhase2.jsx — slides 20–23  (z-index 9)
+// src/components/AquaCityPhase2.jsx — slides 20–23  (z-index 11)
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -6,10 +6,8 @@ import CanvasSection from './CanvasSection'
 import GlassBox from './GlassBox'
 
 export default function AquaCityPhase2() {
-  const phaseRef    = useRef(null)
-  const labelRef    = useRef(null)
-  const headlineRef = useRef(null)
-  const bodyRef     = useRef(null)
+  const phaseRef = useRef(null)
+  const cardRef  = useRef(null)
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -20,12 +18,8 @@ export default function AquaCityPhase2() {
     })
     tl.fromTo(phaseRef.current,
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.08 }, 0.06)
-    tl.fromTo(labelRef.current,
-      { opacity: 0, y: 8 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.10)
-    tl.fromTo(headlineRef.current,
-      { opacity: 0, y: 14 }, { opacity: 1, y: 0, ease: 'none', duration: 0.12 }, 0.15)
-    tl.fromTo(bodyRef.current,
-      { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: 'none', duration: 0.12 }, 0.24)
+    tl.fromTo(cardRef.current,
+      { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.16 }, 0.10)
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
 
@@ -46,21 +40,21 @@ export default function AquaCityPhase2() {
           }}>Faza 2 · 2028</span>
         </div>
 
-        <div style={{ position: 'absolute', bottom: '12%', left: '8%', maxWidth: '540px' }}>
+        <div ref={cardRef} style={{ position: 'absolute', bottom: '12%', left: '8%', maxWidth: '540px', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
-            <p ref={labelRef} style={{
-              opacity: 0, color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
+            <p style={{
+              color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: 'system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Večernji sadržaji</p>
-            <h2 ref={headlineRef} style={{
-              opacity: 0, color: '#ffffff', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+            <h2 style={{
+              color: '#ffffff', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
               fontFamily: 'system-ui, sans-serif', fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
               Kino na jezeru —<br /><span style={{ fontWeight: 600 }}>pod otvorenim nebom</span>
             </h2>
-            <ul ref={bodyRef} style={{ opacity: 0, listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Vanjski LED ekran na vodi', 'Filmovi, sport, kulturna događanja', 'AquaCity aktivan dan i noć'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
