@@ -1,15 +1,4 @@
 // src/components/CanvasSection.jsx
-// Reusable scroll-scrubbed canvas section.
-//
-// Props:
-//   name         – folder under public/frames/  e.g. "aquacity-intro"
-//   totalFrames  – number of extracted frames
-//   height       – scroll container height, default "320vh"
-//   children     – overlay content (text, etc.)
-//   onProgress   – optional (progress: 0–1) => void callback
-//   fadeIn       – [start, end] progress values for section fade-in,  default [0, 0.08]
-//   fadeOut      – [start, end] progress values for section fade-out, default [0.88, 1.0]
-
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -18,10 +7,8 @@ export default function CanvasSection({
   name,
   totalFrames,
   height = '320vh',
+  zIndex = 1,
   children,
-  onProgress,
-  fadeIn  = [0, 0.03],
-  fadeOut = [0.95, 1.0],
 }) {
   const containerRef = useRef(null)
   const wrapperRef   = useRef(null)
@@ -51,7 +38,6 @@ export default function CanvasSection({
       ctx.drawImage(img, (cw - sw) / 2, (ch - sh) / 2, sw, sh)
     }
 
-    // Preload all frames
     for (let i = 0; i < totalFrames; i++) {
       const img = new Image()
       img.src = `/frames/${name}/frame_${String(i + 1).padStart(4, '0')}.jpg`
@@ -68,25 +54,22 @@ export default function CanvasSection({
       onUpdate: (self) => {
         const idx = Math.min(totalFrames - 1, Math.floor(self.progress * totalFrames))
         if (idx !== current) { current = idx; draw(frames[idx]) }
-        onProgress?.(self.progress)
       },
     })
 
-    // Section fade-in / fade-out
-    const fadeDur = fadeOut[1] - fadeOut[0]
-    const fadeInDur = fadeIn[1] - fadeIn[0]
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.2,
-      },
-    })
-    tl.fromTo(wrapperRef.current,
-      { opacity: 0 }, { opacity: 1, ease: 'none', duration: fadeInDur }, fadeIn[0])
-    tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: fadeDur }, fadeOut[0])
+    // Fade in only — no fade out (next section covers this one via z-index)
+    gsap.fromTo(wrapperRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1, ease: 'none', duration: 0.03,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1.2,
+        },
+      }
+    )
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())
@@ -97,10 +80,9 @@ export default function CanvasSection({
   return (
     <>
       <div ref={containerRef} style={{ height }} />
-
       <div ref={wrapperRef} style={{
-        position: 'fixed', inset: 0, zIndex: 1,
-        overflow: 'hidden', opacity: 0,
+        position: 'fixed', inset: 0,
+        zIndex, overflow: 'hidden', opacity: 0,
       }}>
         <canvas ref={canvasRef} style={{
           position: 'absolute', inset: 0,

@@ -46,11 +46,7 @@ export default function HeroScroll() {
       0.52
     )
 
-    // Whole section fades out 95→100%
-    tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: 0.05 },
-      0.95
-    )
+    // No fade-out — next section (higher z-index) covers this one
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
