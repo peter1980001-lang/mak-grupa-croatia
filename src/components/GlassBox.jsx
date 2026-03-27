@@ -2,7 +2,7 @@
 export default function GlassBox({ children, style, className = '' }) {
   return (
     <div className={`glass-card ${className}`} style={{
-      background: 'rgba(6, 9, 6, 0.32)',
+      background: 'rgba(6, 9, 6, 0.18)',
       backdropFilter: 'blur(22px)',
       WebkitBackdropFilter: 'blur(22px)',
       border: '1px solid rgba(255,255,255,0.07)',

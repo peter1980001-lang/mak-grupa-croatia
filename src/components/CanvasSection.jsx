@@ -77,9 +77,9 @@ export default function CanvasSection({
       },
     })
     tl.fromTo(wrapperRef.current,
-      { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.03 }, 0)
+      { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.001 }, 0)
     tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: 0.02 }, 0.98)
+      { opacity: 0, ease: 'none', duration: 0.005 }, 0.995)
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())
