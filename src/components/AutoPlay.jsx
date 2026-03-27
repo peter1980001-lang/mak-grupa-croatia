@@ -1,119 +1,142 @@
 // src/components/AutoPlay.jsx
-// Drives the page automatically at a constant scroll speed.
-// Manual wheel / touch pauses it; a glass button lets the user
-// play / pause / restart from anywhere on the page.
+// Drives the page at a constant scroll speed using the GSAP ticker —
+// same loop that drives Lenis — so there is no dual-RAF conflict.
+// During playback Lenis is stopped; native window.scrollTo + manual
+// ScrollTrigger.update() keep all GSAP animations perfectly in sync.
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import lenisRef from '../lib/lenisRef'
 
 const SPEED_PX_S = 180   // pixels per second
-const PAUSE_MS   = 2000  // how long a manual-scroll pause lasts
+const PAUSE_MS   = 2000  // ms to wait after a manual scroll before resuming
 
 export default function AutoPlay() {
-  const [playing, setPlaying]   = useState(false)
-  const [done,    setDone]      = useState(false)
-  const rafRef    = useRef(null)
-  const prevTimeRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
+  const [done,    setDone]    = useState(false)
+  const posRef      = useRef(0)
   const pauseTimer  = useRef(null)
-  const posRef    = useRef(0)  // shadow of current scroll position
+  const tickRef     = useRef(null)
 
-  // ── tick ──────────────────────────────────────────────────────────────────
-  const tick = useCallback((timestamp) => {
-    if (prevTimeRef.current == null) prevTimeRef.current = timestamp
-    const dt = (timestamp - prevTimeRef.current) / 1000
-    prevTimeRef.current = timestamp
+  // ── define tick once, store in ref so gsap.ticker add/remove is stable ────
+  useEffect(() => {
+    function tick(_time, deltaTime) {
+      // cap delta so a tab-switch doesn't cause a huge jump
+      const dt = Math.min(deltaTime, 50) / 1000
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      posRef.current  = Math.min(posRef.current + SPEED_PX_S * dt, maxScroll)
 
-    const lenis = lenisRef.current
-    if (!lenis) { rafRef.current = requestAnimationFrame(tick); return }
+      window.scrollTo(0, posRef.current)
+      ScrollTrigger.update()   // push all GSAP scroll animations forward
 
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-    posRef.current  = Math.min(posRef.current + SPEED_PX_S * dt, maxScroll)
-
-    lenis.scrollTo(posRef.current, { immediate: true, force: true })
-
-    if (posRef.current >= maxScroll) {
-      setPlaying(false)
-      setDone(true)
-      return
+      if (posRef.current >= maxScroll) {
+        gsap.ticker.remove(tickRef.current)
+        setPlaying(false)
+        setDone(true)
+      }
     }
-
-    rafRef.current = requestAnimationFrame(tick)
+    tickRef.current = tick
   }, [])
 
-  // ── start / stop helpers ──────────────────────────────────────────────────
+  // ── helpers ───────────────────────────────────────────────────────────────
+  const stopLenis = () => {
+    const l = lenisRef.current
+    if (l) l.stop()
+  }
+
+  const resumeLenis = () => {
+    const l = lenisRef.current
+    if (!l) return
+    // Sync Lenis's internal target to current position so it doesn't
+    // try to animate from its old target when it resumes.
+    l.scrollTo(window.scrollY, { immediate: true, force: true })
+    l.start()
+  }
+
   const start = useCallback(() => {
-    prevTimeRef.current = null
+    stopLenis()
     setPlaying(true)
     setDone(false)
-    rafRef.current = requestAnimationFrame(tick)
-  }, [tick])
+    gsap.ticker.add(tickRef.current)
+  }, [])
 
   const pause = useCallback(() => {
+    gsap.ticker.remove(tickRef.current)
     setPlaying(false)
-    if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null }
+    resumeLenis()
   }, [])
 
   const restart = useCallback(() => {
-    pause()
+    gsap.ticker.remove(tickRef.current)
     posRef.current = 0
-    const lenis = lenisRef.current
-    if (lenis) lenis.scrollTo(0, { immediate: true, force: true })
-    setTimeout(() => start(), 80)   // brief delay so scroll settles
-  }, [pause, start])
+    window.scrollTo(0, 0)
+    ScrollTrigger.update()
+    stopLenis()
+    setTimeout(() => {
+      setPlaying(true)
+      setDone(false)
+      gsap.ticker.add(tickRef.current)
+    }, 80)
+  }, [])
 
   // ── manual-scroll detection → pause temporarily ───────────────────────────
   useEffect(() => {
     const onManual = () => {
       if (!playing) return
-      pause()
-      // sync shadow position with actual scroll so we resume from here
+      gsap.ticker.remove(tickRef.current)
+      setPlaying(false)
       posRef.current = window.scrollY
+      resumeLenis()
+
       clearTimeout(pauseTimer.current)
       pauseTimer.current = setTimeout(() => {
-        prevTimeRef.current = null
+        stopLenis()
         setPlaying(true)
-        rafRef.current = requestAnimationFrame(tick)
+        gsap.ticker.add(tickRef.current)
       }, PAUSE_MS)
     }
-    window.addEventListener('wheel',      onManual, { passive: true })
-    window.addEventListener('touchmove',  onManual, { passive: true })
+
+    window.addEventListener('wheel',     onManual, { passive: true })
+    window.addEventListener('touchmove', onManual, { passive: true })
     return () => {
       window.removeEventListener('wheel',     onManual)
       window.removeEventListener('touchmove', onManual)
       clearTimeout(pauseTimer.current)
     }
-  }, [playing, pause, tick])
+  }, [playing])
 
   // ── cleanup on unmount ────────────────────────────────────────────────────
   useEffect(() => () => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    gsap.ticker.remove(tickRef.current)
     clearTimeout(pauseTimer.current)
+    resumeLenis()
   }, [])
 
   // ── button ────────────────────────────────────────────────────────────────
   const btn = {
-    position:       'fixed',
-    bottom:         '1.6rem',
-    right:          '5rem',      // sits left of the audio button (which is at 1.8rem)
-    zIndex:         9999,
-    width:          '2.6rem',
-    height:         '2.6rem',
-    borderRadius:   '50%',
-    border:         '1px solid rgba(255,255,255,0.12)',
-    background:     'rgba(6, 9, 6, 0.55)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
-    cursor:         'pointer',
-    display:        'flex',
-    alignItems:     'center',
-    justifyContent: 'center',
-    padding:        0,
-    transition:     'background 0.2s ease',
+    position:            'fixed',
+    bottom:              '1.6rem',
+    right:               '5rem',
+    zIndex:              9999,
+    width:               '2.6rem',
+    height:              '2.6rem',
+    borderRadius:        '50%',
+    border:              '1px solid rgba(255,255,255,0.12)',
+    background:          'rgba(6, 9, 6, 0.55)',
+    backdropFilter:      'blur(16px)',
+    WebkitBackdropFilter:'blur(16px)',
+    cursor:              'pointer',
+    display:             'flex',
+    alignItems:          'center',
+    justifyContent:      'center',
+    padding:             0,
+    transition:          'background 0.2s ease',
   }
 
   const handleClick = () => {
     if (done)    { restart(); return }
-    if (playing) { pause()  ; clearTimeout(pauseTimer.current) }
-    else         { prevTimeRef.current = null; posRef.current = window.scrollY; start() }
+    if (playing) { pause(); clearTimeout(pauseTimer.current) }
+    else         { posRef.current = window.scrollY; start() }
   }
 
   const title = done ? 'Ponovi prezentaciju' : playing ? 'Pauziraj autoplay' : 'Pokreni autoplay'

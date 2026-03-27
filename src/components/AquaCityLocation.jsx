@@ -12,11 +12,11 @@ export default function AquaCityLocation() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '[data-section="aquacity-location"]',
-        start: 'top top', end: 'bottom bottom', scrub: 1.2,
+        start: 'top top', end: 'bottom bottom', scrub: true,
       },
     })
     tl.fromTo(cardRef.current,
-      { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.16 }, 0.08)
+      { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.03)
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
 

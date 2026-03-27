@@ -1,21 +1,35 @@
 // src/components/PageCounter.jsx
-// Fixed bottom-right pill that shows current section / total.
-// Section boundaries are derived from the same vh heights used in HomePage.
+// Fixed bottom-right pill showing current section / total.
+// Listens to the Lenis scroll event (not native window scroll) so it
+// updates correctly whether the user is scrolling manually or via autoplay.
 import { useEffect, useState } from 'react'
+import lenisRef from '../lib/lenisRef'
 
-// Heights (in vh) for each section, in document order:
-// HeroScroll, AquaCityIntro, static-identity, AquaCityProblem,
-// AquaCityLocation, static-varazdin-transit, AquaCityVision,
-// static-model, static-phases, Phase1–5,
-// static-full-vision, static-partnership, static-nextstep, static-contact
+// Heights (in vh) for each section, in document order — must match HomePage.jsx
 const SECTION_VH = [
-  300, 320, 150, 340, 320, 160, 320, 180, 170,
-  320, 320, 320, 320, 320, 160, 200, 150, 150,
+  300, // HeroScroll
+  320, // AquaCityIntro
+  220, // static-identity
+  340, // AquaCityProblem
+  320, // AquaCityLocation
+  240, // static-varazdin-transit
+  320, // AquaCityVision
+  280, // static-model
+  260, // static-phases
+  320, // AquaCityPhase1
+  320, // AquaCityPhase2
+  320, // AquaCityPhase3
+  320, // AquaCityPhase4
+  320, // AquaCityPhase5
+  220, // static-full-vision
+  300, // static-partnership
+  230, // static-nextstep
+  210, // static-contact
 ]
 const TOTAL = SECTION_VH.length
 
-function currentPage() {
-  const scrollVh = window.scrollY / window.innerHeight
+function currentPage(scrollY) {
+  const scrollVh = scrollY / window.innerHeight
   let cumulative = 0
   for (let i = 0; i < SECTION_VH.length; i++) {
     cumulative += SECTION_VH[i]
@@ -30,16 +44,31 @@ export default function PageCounter() {
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    const update = () => setPage(currentPage())
-    window.addEventListener('scroll', update, { passive: true })
-    return () => window.removeEventListener('scroll', update)
+    // Manual scroll: Lenis fires its own event (window.scrollY may lag)
+    const updateLenis = ({ scroll }) => setPage(currentPage(scroll))
+    // Autoplay: Lenis is stopped, so we catch the native scroll event fired
+    // by window.scrollTo() in AutoPlay.jsx
+    const updateNative = () => setPage(currentPage(window.scrollY))
+
+    const id = setTimeout(() => {
+      const lenis = lenisRef.current
+      if (lenis) lenis.on('scroll', updateLenis)
+    }, 0)
+    window.addEventListener('scroll', updateNative, { passive: true })
+
+    return () => {
+      clearTimeout(id)
+      const lenis = lenisRef.current
+      if (lenis) lenis.off('scroll', updateLenis)
+      window.removeEventListener('scroll', updateNative)
+    }
   }, [])
 
   return (
     <div style={{
       position:            'fixed',
       bottom:              '1.6rem',
-      right:               '8.4rem',   // sits left of the autoplay button (right: 5rem)
+      right:               '8.4rem',
       zIndex:              9999,
       height:              '2.6rem',
       padding:             '0 0.9rem',

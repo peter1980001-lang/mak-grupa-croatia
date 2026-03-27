@@ -17,7 +17,7 @@ export default function HeroScroll() {
         trigger: containerRef.current,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1.2,
+        scrub: true,
       },
     })
 
