@@ -15,6 +15,7 @@ import GlassBox          from '../components/GlassBox'
 import logoSrc           from '../assets/logo.jpeg'
 import AudioManager      from '../components/AudioManager'
 import AutoPlay         from '../components/AutoPlay'
+import PageCounter      from '../components/PageCounter'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -68,6 +69,7 @@ export default function HomePage() {
     <SmoothScroll>
       <AudioManager />
       <AutoPlay />
+      <PageCounter />
 
       {/* ══════════════════════════════════════════════════════════════════════
           SLIDE 1–2  |  Hero + Intro cinematic  |  z 0–2
