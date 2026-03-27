@@ -18,9 +18,9 @@ export default function StaticSlide({ id, zIndex, height = '150vh', children }) 
     })
     // Soft fade in over first 12% of scroll, hold, then fade out over last 12%
     tl.fromTo(wrapperRef.current,
-      { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.12 }, 0)
+      { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.06 }, 0)
     tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: 0.12 }, 0.88)
+      { opacity: 0, ease: 'none', duration: 0.06 }, 0.94)
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])

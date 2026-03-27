@@ -17,6 +17,7 @@ export default function AquaCityVision() {
     })
     tl.fromTo(cardRef.current,
       { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.03)
+    tl.to({}, { duration: 0 }, 1)
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
 
