@@ -5,7 +5,6 @@
 // ScrollTrigger.update() keep all GSAP animations perfectly in sync.
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import lenisRef from '../lib/lenisRef'
 
 const SPEED_PX_S = 180   // pixels per second
@@ -19,15 +18,20 @@ export default function AutoPlay() {
   const tickRef     = useRef(null)
 
   // ── define tick once, store in ref so gsap.ticker add/remove is stable ────
+  // Drive Lenis directly (not window.scrollTo) — Lenis owns the scroll
+  // position when active; going behind its back causes black screens.
   useEffect(() => {
     function tick(_time, deltaTime) {
+      const l = lenisRef.current
+      if (!l) return
       // cap delta so a tab-switch doesn't cause a huge jump
       const dt = Math.min(deltaTime, 50) / 1000
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
       posRef.current  = Math.min(posRef.current + SPEED_PX_S * dt, maxScroll)
 
-      window.scrollTo(0, posRef.current)
-      ScrollTrigger.update()   // push all GSAP scroll animations forward
+      // Let Lenis move the scroll — it fires its own 'scroll' event which
+      // already calls ScrollTrigger.update() via SmoothScroll.jsx.
+      l.scrollTo(posRef.current, { immediate: true })
 
       if (posRef.current >= maxScroll) {
         gsap.ticker.remove(tickRef.current)
@@ -38,23 +42,7 @@ export default function AutoPlay() {
     tickRef.current = tick
   }, [])
 
-  // ── helpers ───────────────────────────────────────────────────────────────
-  const stopLenis = () => {
-    const l = lenisRef.current
-    if (l) l.stop()
-  }
-
-  const resumeLenis = () => {
-    const l = lenisRef.current
-    if (!l) return
-    // Sync Lenis's internal target to current position so it doesn't
-    // try to animate from its old target when it resumes.
-    l.scrollTo(window.scrollY, { immediate: true, force: true })
-    l.start()
-  }
-
   const start = useCallback(() => {
-    stopLenis()
     setPlaying(true)
     setDone(false)
     gsap.ticker.add(tickRef.current)
@@ -63,15 +51,13 @@ export default function AutoPlay() {
   const pause = useCallback(() => {
     gsap.ticker.remove(tickRef.current)
     setPlaying(false)
-    resumeLenis()
   }, [])
 
   const restart = useCallback(() => {
     gsap.ticker.remove(tickRef.current)
     posRef.current = 0
-    window.scrollTo(0, 0)
-    ScrollTrigger.update()
-    stopLenis()
+    const l = lenisRef.current
+    if (l) l.scrollTo(0, { immediate: true })
     setTimeout(() => {
       setPlaying(true)
       setDone(false)
@@ -85,12 +71,11 @@ export default function AutoPlay() {
       if (!playing) return
       gsap.ticker.remove(tickRef.current)
       setPlaying(false)
-      posRef.current = window.scrollY
-      resumeLenis()
+      const l = lenisRef.current
+      if (l) posRef.current = l.scroll ?? window.scrollY
 
       clearTimeout(pauseTimer.current)
       pauseTimer.current = setTimeout(() => {
-        stopLenis()
         setPlaying(true)
         gsap.ticker.add(tickRef.current)
       }, PAUSE_MS)
@@ -109,7 +94,6 @@ export default function AutoPlay() {
   useEffect(() => () => {
     gsap.ticker.remove(tickRef.current)
     clearTimeout(pauseTimer.current)
-    resumeLenis()
   }, [])
 
   // ── button ────────────────────────────────────────────────────────────────
@@ -136,7 +120,7 @@ export default function AutoPlay() {
   const handleClick = () => {
     if (done)    { restart(); return }
     if (playing) { pause(); clearTimeout(pauseTimer.current) }
-    else         { posRef.current = window.scrollY; start() }
+    else         { const l = lenisRef.current; posRef.current = l ? (l.scroll ?? window.scrollY) : window.scrollY; start() }
   }
 
   const title = done ? 'Ponovi prezentaciju' : playing ? 'Pauziraj autoplay' : 'Pokreni autoplay'
