@@ -81,7 +81,7 @@ export default function HomePage() {
           SLIDE 3  |  AquaCity – mjesto koje generacije poznaju  |  z 3
           PDF p.3
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-identity" zIndex={3} height="220vh">
+      <StaticSlide id="static-identity" zIndex={3} height="270vh">
         <GlassBox style={{ maxWidth: '700px', textAlign: 'center', padding: '3rem 3.5rem' }}>
           <p style={T.label}>AquaCity Varaždin</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.6rem' }}>
@@ -115,7 +115,7 @@ export default function HomePage() {
           SLIDE 7–8  |  Varaždin: Strateška točka  |  z 6
           PDF p.7–8
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-varazdin-transit" zIndex={6} height="240vh">
+      <StaticSlide id="static-varazdin-transit" zIndex={6} height="290vh">
         <GlassBox style={{ maxWidth: '760px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Strateška pozicija</p>
           <h2 style={{ ...T.h2, marginBottom: '2rem' }}>
@@ -162,7 +162,7 @@ export default function HomePage() {
           SLIDE 11–17  |  Model, zaštita i kontrola  |  z 8
           PDF p.11–17
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-model" zIndex={8} height="280vh">
+      <StaticSlide id="static-model" zIndex={8} height="350vh">
         <GlassBox style={{ maxWidth: '820px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Model razvoja</p>
           <h2 style={{ ...T.h2, marginBottom: '2.2rem' }}>
@@ -222,7 +222,7 @@ export default function HomePage() {
           SLIDE 14  |  5-phase timeline  |  z 9
           PDF p.14
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-phases" zIndex={9} height="260vh">
+      <StaticSlide id="static-phases" zIndex={9} height="330vh">
         <GlassBox style={{ maxWidth: '800px', padding: '3rem 3.5rem' }}>
           <p style={{ ...T.label, textAlign: 'center', marginBottom: '1.6rem' }}>Plan razvoja</p>
           <h2 style={{ ...T.h2, textAlign: 'center', marginBottom: '2.4rem', fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>
@@ -288,7 +288,7 @@ export default function HomePage() {
           SLIDE 35–36  |  Cjelovita vizija  |  z 15
           PDF p.35–36
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-full-vision" zIndex={15} height="220vh">
+      <StaticSlide id="static-full-vision" zIndex={15} height="270vh">
         <GlassBox style={{ maxWidth: '720px', textAlign: 'center', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Cjelovita vizija</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.8rem' }}>
@@ -323,7 +323,7 @@ export default function HomePage() {
           SLIDE 37–41  |  Partnerstvo + koristi za Grad + regija + zajednica  |  z 16
           PDF p.37–41
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-partnership" zIndex={16} height="300vh">
+      <StaticSlide id="static-partnership" zIndex={16} height="370vh">
         <GlassBox className="mobile-scroll" style={{ maxWidth: '860px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Model javno-privatnog partnerstva</p>
           <h2 style={{ ...T.h2, marginBottom: '2.2rem' }}>
@@ -390,7 +390,7 @@ export default function HomePage() {
           SLIDE 42  |  Sljedeći korak — pokretanje Faze 1  |  z 17
           PDF p.42
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-nextstep" zIndex={17} height="230vh">
+      <StaticSlide id="static-nextstep" zIndex={17} height="280vh">
         <GlassBox style={{ maxWidth: '680px', textAlign: 'center', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Sljedeći korak</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.6rem' }}>
@@ -425,7 +425,7 @@ export default function HomePage() {
           SLIDE 43  |  Zaključak + Kontakt  |  z 18
           PDF p.43
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-contact" zIndex={18} height="210vh">
+      <StaticSlide id="static-contact" zIndex={18} height="260vh">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.8rem', width: '100%', maxWidth: '700px', padding: '0 2rem' }}>
 
           {/* Logo — prominent, same treatment as hero */}

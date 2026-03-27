@@ -54,19 +54,20 @@ export default function CanvasSection({
       frames.push(img)
     }
 
-    // Canvas scrub
+    // Canvas scrub — all frames play in first 75% of scroll, last frame holds for remaining 25%
     ScrollTrigger.create({
       trigger: containerRef.current,
       start: 'top top',
       end: 'bottom bottom',
       scrub: true,
       onUpdate: (self) => {
-        const idx = Math.min(totalFrames - 1, Math.floor(self.progress * totalFrames))
+        const ratio = Math.min(self.progress / 0.75, 1)
+        const idx   = Math.min(totalFrames - 1, Math.floor(ratio * totalFrames))
         if (idx !== current) { current = idx; draw(frames[idx]) }
       },
     })
 
-    // Fade in 0→3%, fade out 96→100%
+    // Fade in 0→3% only — no fade-out, z-index layering handles transitions
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -77,8 +78,6 @@ export default function CanvasSection({
     })
     tl.fromTo(wrapperRef.current,
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.03 }, 0)
-    tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: 0.04 }, 0.96)
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())

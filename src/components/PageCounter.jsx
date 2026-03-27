@@ -9,22 +9,22 @@ import lenisRef from '../lib/lenisRef'
 const SECTION_VH = [
   300, // HeroScroll
   320, // AquaCityIntro
-  220, // static-identity
+  270, // static-identity
   340, // AquaCityProblem
   320, // AquaCityLocation
-  240, // static-varazdin-transit
+  290, // static-varazdin-transit
   320, // AquaCityVision
-  280, // static-model
-  260, // static-phases
+  350, // static-model
+  330, // static-phases
   320, // AquaCityPhase1
   320, // AquaCityPhase2
   320, // AquaCityPhase3
   320, // AquaCityPhase4
   320, // AquaCityPhase5
-  220, // static-full-vision
-  300, // static-partnership
-  230, // static-nextstep
-  210, // static-contact
+  270, // static-full-vision
+  370, // static-partnership
+  280, // static-nextstep
+  260, // static-contact
 ]
 const TOTAL = SECTION_VH.length
 
