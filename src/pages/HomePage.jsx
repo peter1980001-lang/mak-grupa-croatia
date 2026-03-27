@@ -15,7 +15,6 @@ import GlassBox          from '../components/GlassBox'
 import logoSrc           from '../assets/logo.jpeg'
 import AudioManager      from '../components/AudioManager'
 import AutoPlay         from '../components/AutoPlay'
-import PageCounter      from '../components/PageCounter'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -69,7 +68,6 @@ export default function HomePage() {
     <SmoothScroll>
       <AudioManager />
       <AutoPlay />
-      <PageCounter />
 
       {/* ══════════════════════════════════════════════════════════════════════
           SLIDE 1–2  |  Hero + Intro cinematic  |  z 0–2
@@ -81,7 +79,7 @@ export default function HomePage() {
           SLIDE 3  |  AquaCity – mjesto koje generacije poznaju  |  z 3
           PDF p.3
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-identity" zIndex={3} height="270vh">
+      <StaticSlide id="static-identity" zIndex={3} height="160vh">
         <GlassBox style={{ maxWidth: '700px', textAlign: 'center', padding: '3rem 3.5rem' }}>
           <p style={T.label}>AquaCity Varaždin</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.6rem' }}>
@@ -162,7 +160,7 @@ export default function HomePage() {
           SLIDE 11–17  |  Model, zaštita i kontrola  |  z 8
           PDF p.11–17
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-model" zIndex={8} height="350vh">
+      <StaticSlide id="static-model" zIndex={8} height="550vh">
         <GlassBox style={{ maxWidth: '820px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Model razvoja</p>
           <h2 style={{ ...T.h2, marginBottom: '2.2rem' }}>
@@ -222,7 +220,7 @@ export default function HomePage() {
           SLIDE 14  |  5-phase timeline  |  z 9
           PDF p.14
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-phases" zIndex={9} height="330vh">
+      <StaticSlide id="static-phases" zIndex={9} height="530vh">
         <GlassBox style={{ maxWidth: '800px', padding: '3rem 3.5rem' }}>
           <p style={{ ...T.label, textAlign: 'center', marginBottom: '1.6rem' }}>Plan razvoja</p>
           <h2 style={{ ...T.h2, textAlign: 'center', marginBottom: '2.4rem', fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>
@@ -230,20 +228,19 @@ export default function HomePage() {
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
             {[
-              { faza: 'Faza 1', year: '2027', title: 'Aktivacija vode i društvenih sadržaja', desc: 'Električni PLJUS brodići, plutajuće platforme — jezero postaje aktivan prostor boravka' },
-              { faza: 'Faza 2', year: '2028', title: 'Večernji sadržaji i kino', desc: 'LED ekran na vodi, filmovi, sport i kulturna događanja — AquaCity aktivan dan i noć' },
-              { faza: 'Faza 3', year: '2029', title: 'Aktivne vodene atrakcije', desc: 'Napuhavajući vodeni park, 30+ atrakcija — nova razina atraktivnosti i ponovnih dolazaka' },
-              { faza: 'Faza 4', year: '2030', title: 'Wellness i Fitness', desc: 'Sauna, spa, outdoor fitness uz jezero — cjelogodišnja rutina, ne samo sezonski posjet' },
-              { faza: 'Faza 5', year: '2031', title: 'Smještaj na jezeru', desc: 'Glamping, plutajući bungalovi — posjet postaje boravak, viša vrijednost po gostu' },
-            ].map(({ faza, year, title, desc }, i) => (
+              { faza: 'Faza 1', title: 'Aktivacija vode i društvenih sadržaja', desc: 'Električni PLJUS brodići, plutajuće platforme — jezero postaje aktivan prostor boravka' },
+              { faza: 'Faza 2', title: 'Večernji sadržaji i kino', desc: 'LED ekran na vodi, filmovi, sport i kulturna događanja — AquaCity aktivan dan i noć' },
+              { faza: 'Faza 3', title: 'Aktivne vodene atrakcije', desc: 'Napuhavajući vodeni park, 30+ atrakcija — nova razina atraktivnosti i ponovnih dolazaka' },
+              { faza: 'Faza 4', title: 'Wellness i Fitness', desc: 'Sauna, spa, outdoor fitness uz jezero — cjelogodišnja rutina, ne samo sezonski posjet' },
+              { faza: 'Faza 5', title: 'Smještaj na jezeru', desc: 'Glamping, plutajući bungalovi — posjet postaje boravak, viša vrijednost po gostu' },
+            ].map(({ faza, title, desc }, i) => (
               <div key={faza} style={{
                 display: 'flex', alignItems: 'flex-start', gap: '1.5rem',
                 paddingBottom: '0.9rem',
                 borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.06)' : 'none',
               }}>
-                <div style={{ minWidth: '88px', paddingTop: '0.1rem' }}>
+                <div style={{ minWidth: '64px', paddingTop: '0.1rem' }}>
                   <span style={{ color: '#c9a84c', fontSize: 'clamp(0.55rem, 0.85vw, 0.7rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', display: 'block' }}>{faza}</span>
-                  <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 'clamp(0.65rem, 0.95vw, 0.8rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 300, margin: '0.15rem 0 0 0' }}>{year}</p>
                 </div>
                 <div>
                   <p style={{ color: '#ffffff', fontSize: 'clamp(0.9rem, 1.35vw, 1.02rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 500, margin: '0 0 0.25rem 0' }}>{title}</p>
@@ -288,7 +285,7 @@ export default function HomePage() {
           SLIDE 35–36  |  Cjelovita vizija  |  z 15
           PDF p.35–36
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-full-vision" zIndex={15} height="270vh">
+      <StaticSlide id="static-full-vision" zIndex={15} height="470vh">
         <GlassBox style={{ maxWidth: '720px', textAlign: 'center', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Cjelovita vizija</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.8rem' }}>
@@ -323,7 +320,7 @@ export default function HomePage() {
           SLIDE 37–41  |  Partnerstvo + koristi za Grad + regija + zajednica  |  z 16
           PDF p.37–41
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-partnership" zIndex={16} height="370vh">
+      <StaticSlide id="static-partnership" zIndex={16} height="770vh">
         <GlassBox className="mobile-scroll" style={{ maxWidth: '860px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Model javno-privatnog partnerstva</p>
           <h2 style={{ ...T.h2, marginBottom: '2.2rem' }}>
@@ -390,7 +387,7 @@ export default function HomePage() {
           SLIDE 42  |  Sljedeći korak — pokretanje Faze 1  |  z 17
           PDF p.42
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-nextstep" zIndex={17} height="280vh">
+      <StaticSlide id="static-nextstep" zIndex={17} height="480vh">
         <GlassBox style={{ maxWidth: '680px', textAlign: 'center', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Sljedeći korak</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.6rem' }}>

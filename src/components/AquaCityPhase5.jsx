@@ -38,7 +38,7 @@ export default function AquaCityPhase5() {
             fontFamily: 'system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.3em', textTransform: 'uppercase',
             borderLeft: '2px solid #c9a84c', paddingLeft: '0.75rem',
-          }}>Faza 5 · 2031</span>
+          }}>Faza 5</span>
         </div>
 
         <div ref={cardRef} className="slide-card slide-card--center" style={{ position: 'absolute', bottom: '12%', left: '50%', transform: 'translateX(-50%)', maxWidth: '600px', textAlign: 'center', opacity: 0 }}>

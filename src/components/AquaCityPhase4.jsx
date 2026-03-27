@@ -26,7 +26,7 @@ export default function AquaCityPhase4() {
 
   return (
     <div data-section="aquacity-phase4">
-      <CanvasSection name="aquacity-phase4" totalFrames={167} height="320vh" zIndex={13} focusX={0.65}>
+      <CanvasSection name="aquacity-phase4" totalFrames={167} height="280vh" zIndex={13} focusX={0.65}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%)',
@@ -38,10 +38,10 @@ export default function AquaCityPhase4() {
             fontFamily: 'system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.3em', textTransform: 'uppercase',
             borderLeft: '2px solid #c9a84c', paddingLeft: '0.75rem',
-          }}>Faza 4 · 2030</span>
+          }}>Faza 4</span>
         </div>
 
-        <div ref={cardRef} className="slide-card slide-card--right" style={{ position: 'absolute', bottom: '12%', right: '8%', maxWidth: '500px', textAlign: 'right', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '20%', left: '8%', width: 'min(84%, 500px)', textAlign: 'left', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
@@ -60,9 +60,9 @@ export default function AquaCityPhase4() {
                 <li key={item} style={{
                   color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: 'system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
-                  display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.75rem',
+                  display: 'flex', alignItems: 'center', gap: '0.75rem',
                 }}>
-                  {item}<span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>
+                  <span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>{item}
                 </li>
               ))}
             </ul>

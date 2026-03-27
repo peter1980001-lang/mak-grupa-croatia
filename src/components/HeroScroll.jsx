@@ -21,29 +21,33 @@ export default function HeroScroll() {
       },
     })
 
-    // "Predstavlja": fade in 0→12%, fade out 30→42%
-    tl.fromTo(textRef.current,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, ease: 'none', duration: 0.12 },
-      0
-    )
-    tl.to(textRef.current,
-      { opacity: 0, y: -10, ease: 'none', duration: 0.12 },
-      0.30
-    )
-
-    // Logo: fade in 38→65%
+    // Logo: fade in 0→10%, hold, fade out 50→60%
     tl.fromTo(logoRef.current,
       { opacity: 0, scale: 0.96 },
-      { opacity: 1, scale: 1, ease: 'none', duration: 0.27 },
-      0.38
+      { opacity: 1, scale: 1, ease: 'none', duration: 0.10 },
+      0
+    )
+    tl.to(logoRef.current,
+      { opacity: 0, scale: 0.98, ease: 'none', duration: 0.10 },
+      0.50
     )
 
-    // Subtitle: fade in 52→68%
+    // Subtitle: fade in 2→12%, hold, fade out 50→60%
     tl.fromTo(subtitleRef.current,
       { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, ease: 'none', duration: 0.16 },
-      0.52
+      { opacity: 1, y: 0, ease: 'none', duration: 0.10 },
+      0.02
+    )
+    tl.to(subtitleRef.current,
+      { opacity: 0, y: -4, ease: 'none', duration: 0.10 },
+      0.50
+    )
+
+    // "Predstavlja": fade in 64→74%, hold until end
+    tl.fromTo(textRef.current,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, ease: 'none', duration: 0.10 },
+      0.64
     )
 
     // Brief fade-out at very end — keeps hero hidden before AquaCityIntro snaps in

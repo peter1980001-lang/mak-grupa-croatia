@@ -42,10 +42,10 @@ export default function AquaCityPhase1() {
             fontFamily: 'system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.3em', textTransform: 'uppercase',
             borderLeft: '2px solid #c9a84c', paddingLeft: '0.75rem',
-          }}>Faza 1 · 2027</span>
+          }}>Faza 1</span>
         </div>
 
-        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '520px', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '10%', left: '8%', width: 'min(84%, 520px)', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',

@@ -38,7 +38,7 @@ export default function AquaCityPhase2() {
             fontFamily: 'system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.3em', textTransform: 'uppercase',
             borderLeft: '2px solid #c9a84c', paddingLeft: '0.75rem',
-          }}>Faza 2 · 2028</span>
+          }}>Faza 2</span>
         </div>
 
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '12%', left: '8%', maxWidth: '540px', opacity: 0 }}>
