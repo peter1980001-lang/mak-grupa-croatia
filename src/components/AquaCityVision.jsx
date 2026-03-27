@@ -29,10 +29,10 @@ export default function AquaCityVision() {
           background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%)',
         }} />
         <div ref={cardRef} className="slide-card" style={{
-          position: 'absolute', top: '38%', left: '8%',
-          textAlign: 'left', width: 'min(84%, 700px)', opacity: 0,
+          position: 'absolute', top: '28%', left: '8%',
+          textAlign: 'center', width: 'min(84%, 700px)', opacity: 0,
         }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem' }}>
+          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem', background: 'rgba(8, 12, 8, 0.12)', border: '1px solid rgba(255,255,255,0.07)' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: 'system-ui, sans-serif', fontWeight: 400,
@@ -45,7 +45,7 @@ export default function AquaCityVision() {
             }}>
               Iz mjesta dolaska<br />u <span style={{ fontWeight: 600 }}>destinaciju ostanka</span>
             </h2>
-            <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '3rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem' }}>
               {[{ n: '01', label: 'Aktivno jezero' }, { n: '02', label: 'Cijeli dan' }, { n: '03', label: 'Cijelu godinu' }].map((p) => (
                 <div key={p.n} style={{ textAlign: 'center' }}>
                   <p style={{
