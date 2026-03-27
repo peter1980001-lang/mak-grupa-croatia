@@ -45,7 +45,7 @@ export default function AquaCityPhase1() {
           }}>Faza 1</span>
         </div>
 
-        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '10%', left: '8%', width: 'min(84%, 520px)', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '4%', left: '8%', width: 'min(84%, 520px)', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',

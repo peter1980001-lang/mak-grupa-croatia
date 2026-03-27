@@ -28,7 +28,7 @@ export default function AquaCityIntro() {
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.25) 100%)',
         }} />
-        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '28%', left: '50%', transform: 'translateX(-50%)', width: 'min(90%, 640px)', textAlign: 'center', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '10%', left: '8%', width: 'min(84%, 640px)', textAlign: 'left', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem', background: 'rgba(8, 12, 8, 0.88)' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)',
