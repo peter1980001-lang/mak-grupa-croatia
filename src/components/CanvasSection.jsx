@@ -58,7 +58,7 @@ export default function CanvasSection({
     ScrollTrigger.create({
       trigger: containerRef.current,
       start: 'top top',
-      end: 'bottom bottom',
+      end: 'bottom top',
       scrub: true,
       onUpdate: (self) => {
         const ratio = self.progress
@@ -72,7 +72,7 @@ export default function CanvasSection({
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: true,
       },
     })

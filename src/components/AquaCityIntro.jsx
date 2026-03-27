@@ -12,7 +12,7 @@ export default function AquaCityIntro() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '[data-section="aquacity-intro"]',
-        start: 'top top', end: 'bottom bottom', scrub: true,
+        start: 'top top', end: 'bottom top', scrub: true,
       },
     })
     tl.fromTo(cardRef.current,

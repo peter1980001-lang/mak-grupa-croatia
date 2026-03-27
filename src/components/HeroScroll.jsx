@@ -16,7 +16,7 @@ export default function HeroScroll() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: true,
       },
     })

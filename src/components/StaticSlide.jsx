@@ -12,7 +12,7 @@ export default function StaticSlide({ id, zIndex, height = '150vh', children }) 
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: true,
       },
     })

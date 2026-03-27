@@ -13,7 +13,7 @@ export default function AquaCityPhase5() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '[data-section="aquacity-phase5"]',
-        start: 'top top', end: 'bottom bottom', scrub: true,
+        start: 'top top', end: 'bottom top', scrub: true,
       },
     })
     tl.fromTo(phaseRef.current,
