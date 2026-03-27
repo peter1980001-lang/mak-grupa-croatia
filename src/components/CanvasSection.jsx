@@ -61,7 +61,7 @@ export default function CanvasSection({
       end: 'bottom bottom',
       scrub: true,
       onUpdate: (self) => {
-        const ratio = Math.min(self.progress / 0.90, 1)
+        const ratio = self.progress
         const idx   = Math.min(totalFrames - 1, Math.floor(ratio * totalFrames))
         if (idx !== current) { current = idx; draw(frames[idx]) }
       },
