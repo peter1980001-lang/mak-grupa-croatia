@@ -46,8 +46,9 @@ export default function HeroScroll() {
       0.52
     )
 
-    // No wrapper fade-out — AquaCityIntro canvas (z-index 2) fades in on top,
-    // so the hero logo is naturally covered without any black gap.
+    // Brief fade-out at very end — keeps hero hidden before AquaCityIntro snaps in
+    tl.to(wrapperRef.current,
+      { opacity: 0, ease: 'none', duration: 0.005 }, 0.995)
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
