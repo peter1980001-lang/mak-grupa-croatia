@@ -77,10 +77,17 @@ export default function AutoPlay() {
       gsap.ticker.remove(tickRef.current)
       setPlaying(false)
       const l = lenisRef.current
-      if (l) posRef.current = l.scroll ?? window.scrollY
+      if (l) {
+        l.start()
+        posRef.current = l.scroll ?? window.scrollY
+      } else {
+        posRef.current = window.scrollY
+      }
 
       clearTimeout(pauseTimer.current)
       pauseTimer.current = setTimeout(() => {
+        const l2 = lenisRef.current
+        if (l2) l2.stop()
         setPlaying(true)
         gsap.ticker.add(tickRef.current)
       }, PAUSE_MS)
@@ -99,6 +106,8 @@ export default function AutoPlay() {
   useEffect(() => () => {
     gsap.ticker.remove(tickRef.current)
     clearTimeout(pauseTimer.current)
+    const l = lenisRef.current
+    if (l) l.start()
   }, [])
 
   // ── button ────────────────────────────────────────────────────────────────
