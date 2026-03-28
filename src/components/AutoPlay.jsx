@@ -42,6 +42,8 @@ export default function AutoPlay() {
   }, [])
 
   const start = useCallback(() => {
+    const l = lenisRef.current
+    if (l) l.stop()
     setPlaying(true)
     setDone(false)
     gsap.ticker.add(tickRef.current)
@@ -49,6 +51,8 @@ export default function AutoPlay() {
 
   const pause = useCallback(() => {
     gsap.ticker.remove(tickRef.current)
+    const l = lenisRef.current
+    if (l) l.start()
     setPlaying(false)
   }, [])
 
