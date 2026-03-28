@@ -1,6 +1,5 @@
 // src/components/AutoPlay.jsx
-// Drives the page at a constant scroll speed using the GSAP ticker —
-// same loop that drives Lenis — so there is no dual-RAF conflict.
+// Drives the page at a constant scroll speed using the GSAP ticker.
 // During playback Lenis is stopped; native window.scrollTo + manual
 // ScrollTrigger.update() keep all GSAP animations perfectly in sync.
 import { useEffect, useRef, useState, useCallback } from 'react'
@@ -19,23 +18,22 @@ export default function AutoPlay() {
   const tickRef     = useRef(null)
 
   // ── define tick once, store in ref so gsap.ticker add/remove is stable ────
-  // Drive Lenis directly (not window.scrollTo) — Lenis owns the scroll
-  // position when active; going behind its back causes black screens.
   useEffect(() => {
     function tick(_time, deltaTime) {
-      const l = lenisRef.current
-      if (!l) return
       // cap delta so a tab-switch doesn't cause a huge jump
       const dt = Math.min(deltaTime, 50) / 1000
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-      posRef.current  = Math.min(posRef.current + SPEED_PX_S * dt, maxScroll)
+      posRef.current = Math.min(posRef.current + SPEED_PX_S * dt, maxScroll)
 
-      // Let Lenis move the scroll — it fires its own 'scroll' event which
-      // already calls ScrollTrigger.update() via SmoothScroll.jsx.
-      l.scrollTo(posRef.current, { immediate: true })
+      // Lenis is stopped during autoplay — drive scroll directly and
+      // call ScrollTrigger.update() manually so all GSAP animations sync.
+      window.scrollTo(0, posRef.current)
+      ScrollTrigger.update()
 
       if (posRef.current >= maxScroll) {
         gsap.ticker.remove(tickRef.current)
+        const l = lenisRef.current
+        if (l) l.start()
         setPlaying(false)
         setDone(true)
       }
