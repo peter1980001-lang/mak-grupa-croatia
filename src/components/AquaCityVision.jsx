@@ -29,7 +29,7 @@ export default function AquaCityVision() {
           background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%)',
         }} />
         <div ref={cardRef} className="slide-card" style={{
-          position: 'absolute', top: '28%', left: '8%',
+          position: 'absolute', top: '23%', left: '8%',
           textAlign: 'center', width: 'min(84%, 700px)', opacity: 0,
         }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem', background: 'rgba(0, 0, 0, 0.92)', border: '1px solid rgba(255,255,255,0.07)' }}>
