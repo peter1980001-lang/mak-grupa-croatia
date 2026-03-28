@@ -47,10 +47,16 @@ export default function CanvasSection({
       ctx.drawImage(img, x, y, sw, sh)
     }
 
+    window.dispatchEvent(new CustomEvent('frames-registered', { detail: { count: totalFrames } }))
+
     for (let i = 0; i < totalFrames; i++) {
       const img = new Image()
       img.src = `/frames/${name}/frame_${String(i + 1).padStart(4, '0')}.jpg`
-      img.onload = () => { loaded++; if (loaded === 1) draw(img) }
+      img.onload = img.onerror = () => {
+        loaded++
+        window.dispatchEvent(new CustomEvent('frame-loaded'))
+        if (loaded === 1 && img.complete && img.naturalWidth > 0) draw(img)
+      }
       frames.push(img)
     }
 

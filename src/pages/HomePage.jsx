@@ -15,6 +15,7 @@ import GlassBox          from '../components/GlassBox'
 import logoSrc           from '../assets/logo.jpeg'
 import AudioManager      from '../components/AudioManager'
 import AutoPlay         from '../components/AutoPlay'
+import LoadingScreen    from '../components/LoadingScreen'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -66,6 +67,7 @@ function Card({ title, body }) {
 export default function HomePage() {
   return (
     <SmoothScroll>
+      <LoadingScreen />
       <AudioManager />
       <AutoPlay />
 
