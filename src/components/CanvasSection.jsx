@@ -51,7 +51,7 @@ export default function CanvasSection({
 
     for (let i = 0; i < totalFrames; i++) {
       const img = new Image()
-      img.src = `/frames/${name}/frame_${String(i + 1).padStart(4, '0')}.jpg`
+      img.src = `/frames/${name}/frame_${String(i + 1).padStart(4, '0')}.webp`
       img.onload = img.onerror = () => {
         loaded++
         window.dispatchEvent(new CustomEvent('frame-loaded'))
