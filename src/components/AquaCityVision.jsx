@@ -32,7 +32,7 @@ export default function AquaCityVision() {
           position: 'absolute', top: '28%', left: '8%',
           textAlign: 'center', width: 'min(84%, 700px)', opacity: 0,
         }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem', background: 'rgba(8, 12, 8, 0.12)', border: '1px solid rgba(255,255,255,0.07)' }}>
+          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem', background: 'rgba(0, 0, 0, 0.92)', border: '1px solid rgba(255,255,255,0.07)' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: 'system-ui, sans-serif', fontWeight: 400,
