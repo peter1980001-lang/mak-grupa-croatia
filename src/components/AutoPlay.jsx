@@ -1,11 +1,13 @@
 // src/components/AutoPlay.jsx
-// Drives the page at a constant scroll speed using the GSAP ticker.
-// During playback Lenis is stopped; native window.scrollTo + manual
-// ScrollTrigger.update() keep all GSAP animations perfectly in sync.
+// Explore Mode  — Lenis smooth scroll, user-driven, no autoplay.
+// Presentation Mode — GSAP ScrollToPlugin animates scroll at constant speed.
+//   Lenis is stopped; GSAP + ScrollTrigger are from the same system → no conflict.
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import lenisRef from '../lib/lenisRef'
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const SPEED_PX_S = 180   // pixels per second
 const PAUSE_MS   = 2000  // ms to wait after a manual scroll before resuming
@@ -13,83 +15,78 @@ const PAUSE_MS   = 2000  // ms to wait after a manual scroll before resuming
 export default function AutoPlay() {
   const [playing, setPlaying] = useState(false)
   const [done,    setDone]    = useState(false)
-  const posRef      = useRef(0)
-  const pauseTimer  = useRef(null)
-  const tickRef     = useRef(null)
+  const tweenRef   = useRef(null)
+  const pauseTimer = useRef(null)
 
-  // ── define tick once, store in ref so gsap.ticker add/remove is stable ────
-  useEffect(() => {
-    function tick(_time, deltaTime) {
-      // cap delta so a tab-switch doesn't cause a huge jump
-      const dt = Math.min(deltaTime, 50) / 1000
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-      posRef.current = Math.min(posRef.current + SPEED_PX_S * dt, maxScroll)
+  // ── create and start a scroll tween from a given position ─────────────────
+  const startTween = useCallback((fromPos) => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    const remaining = maxScroll - fromPos
+    if (remaining <= 0) {
+      const l = lenisRef.current
+      if (l) l.start()
+      setPlaying(false)
+      setDone(true)
+      return
+    }
 
-      // Lenis is stopped during autoplay — drive scroll directly and
-      // call ScrollTrigger.update() manually so all GSAP animations sync.
-      window.scrollTo(0, posRef.current)
-      ScrollTrigger.update()
-
-      if (posRef.current >= maxScroll) {
-        gsap.ticker.remove(tickRef.current)
+    tweenRef.current = gsap.to(window, {
+      scrollTo: { y: maxScroll },
+      duration: remaining / SPEED_PX_S,
+      ease: 'none',
+      onComplete: () => {
         const l = lenisRef.current
         if (l) l.start()
         setPlaying(false)
         setDone(true)
-      }
-    }
-    tickRef.current = tick
+      },
+    })
   }, [])
 
+  // ── start / pause / restart ───────────────────────────────────────────────
   const start = useCallback(() => {
     const l = lenisRef.current
     if (l) l.stop()
     setPlaying(true)
     setDone(false)
-    gsap.ticker.add(tickRef.current)
-  }, [])
+    startTween(window.scrollY)
+  }, [startTween])
 
   const pause = useCallback(() => {
-    gsap.ticker.remove(tickRef.current)
+    tweenRef.current?.pause()
     const l = lenisRef.current
     if (l) l.start()
     setPlaying(false)
   }, [])
 
   const restart = useCallback(() => {
-    gsap.ticker.remove(tickRef.current)
-    posRef.current = 0
+    tweenRef.current?.kill()
+    tweenRef.current = null
     const l = lenisRef.current
     if (l) l.stop()
     window.scrollTo(0, 0)
     setTimeout(() => {
-      ScrollTrigger.update()
       setPlaying(true)
       setDone(false)
-      gsap.ticker.add(tickRef.current)
+      startTween(0)
     }, 80)
-  }, [])
+  }, [startTween])
 
   // ── manual-scroll detection → pause temporarily ───────────────────────────
   useEffect(() => {
     const onManual = () => {
       if (!playing) return
-      gsap.ticker.remove(tickRef.current)
+      tweenRef.current?.pause()
       setPlaying(false)
       const l = lenisRef.current
-      if (l) {
-        l.start()
-        posRef.current = l.scroll ?? window.scrollY
-      } else {
-        posRef.current = window.scrollY
-      }
+      if (l) l.start()
 
       clearTimeout(pauseTimer.current)
       pauseTimer.current = setTimeout(() => {
         const l2 = lenisRef.current
         if (l2) l2.stop()
         setPlaying(true)
-        gsap.ticker.add(tickRef.current)
+        startTween(window.scrollY)
       }, PAUSE_MS)
     }
 
@@ -100,11 +97,11 @@ export default function AutoPlay() {
       window.removeEventListener('touchmove', onManual)
       clearTimeout(pauseTimer.current)
     }
-  }, [playing])
+  }, [playing, startTween])
 
   // ── cleanup on unmount ────────────────────────────────────────────────────
   useEffect(() => () => {
-    gsap.ticker.remove(tickRef.current)
+    tweenRef.current?.kill()
     clearTimeout(pauseTimer.current)
     const l = lenisRef.current
     if (l) l.start()
@@ -134,7 +131,7 @@ export default function AutoPlay() {
   const handleClick = () => {
     if (done)    { restart(); return }
     if (playing) { pause(); clearTimeout(pauseTimer.current) }
-    else         { const l = lenisRef.current; posRef.current = l ? (l.scroll ?? window.scrollY) : window.scrollY; start() }
+    else         { start() }
   }
 
   const title = done ? 'Ponovi prezentaciju' : playing ? 'Pauziraj autoplay' : 'Pokreni autoplay'
