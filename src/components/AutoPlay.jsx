@@ -59,11 +59,11 @@ export default function AutoPlay() {
   const restart = useCallback(() => {
     gsap.ticker.remove(tickRef.current)
     posRef.current = 0
+    const l = lenisRef.current
+    if (l) l.stop()
     window.scrollTo(0, 0)
-    ScrollTrigger.update()
     setTimeout(() => {
-      const l = lenisRef.current
-      if (l) l.stop()
+      ScrollTrigger.update()
       setPlaying(true)
       setDone(false)
       gsap.ticker.add(tickRef.current)
