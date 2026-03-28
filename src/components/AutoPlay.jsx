@@ -5,6 +5,7 @@
 // ScrollTrigger.update() keep all GSAP animations perfectly in sync.
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import lenisRef from '../lib/lenisRef'
 
 const SPEED_PX_S = 180   // pixels per second
