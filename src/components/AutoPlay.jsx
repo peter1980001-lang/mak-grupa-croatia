@@ -1,13 +1,10 @@
 // src/components/AutoPlay.jsx
-// Explore Mode  — Lenis smooth scroll, user-driven, no autoplay.
-// Presentation Mode — GSAP ScrollToPlugin animates scroll at constant speed.
-//   Lenis is stopped; GSAP + ScrollTrigger are from the same system → no conflict.
+// Explore Mode      — Lenis smooth scroll, user-driven.
+// Presentation Mode — lenis.scrollTo() with linear easing at constant speed.
+//   One captain: Lenis owns scroll in both modes. No external window.scrollTo,
+//   no ticker, no GSAP ScrollToPlugin, no conflicts.
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { gsap } from 'gsap'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import lenisRef from '../lib/lenisRef'
-
-gsap.registerPlugin(ScrollToPlugin)
 
 const SPEED_PX_S = 180   // pixels per second
 const PAUSE_MS   = 2000  // ms to wait after a manual scroll before resuming
@@ -15,28 +12,23 @@ const PAUSE_MS   = 2000  // ms to wait after a manual scroll before resuming
 export default function AutoPlay() {
   const [playing, setPlaying] = useState(false)
   const [done,    setDone]    = useState(false)
-  const tweenRef   = useRef(null)
   const pauseTimer = useRef(null)
 
-  // ── create and start a scroll tween from a given position ─────────────────
-  const startTween = useCallback((fromPos) => {
+  // ── ask Lenis to scroll to the end from a given position ─────────────────
+  const startFrom = useCallback((pos) => {
+    const l = lenisRef.current
+    if (!l) return
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-    const remaining = maxScroll - fromPos
+    const remaining = maxScroll - pos
     if (remaining <= 0) {
-      const l = lenisRef.current
-      if (l) l.start()
       setPlaying(false)
       setDone(true)
       return
     }
-
-    tweenRef.current = gsap.to(window, {
-      scrollTo: { y: maxScroll },
+    l.scrollTo(maxScroll, {
       duration: remaining / SPEED_PX_S,
-      ease: 'none',
+      easing:   (t) => t,          // linear — constant speed, no ease-in/out
       onComplete: () => {
-        const l = lenisRef.current
-        if (l) l.start()
         setPlaying(false)
         setDone(true)
       },
@@ -46,47 +38,49 @@ export default function AutoPlay() {
   // ── start / pause / restart ───────────────────────────────────────────────
   const start = useCallback(() => {
     const l = lenisRef.current
-    if (l) l.stop()
+    if (l) l.start()              // ensure Lenis is running
+    const pos = lenisRef.current?.scroll ?? window.scrollY
     setPlaying(true)
     setDone(false)
-    startTween(window.scrollY)
-  }, [startTween])
+    startFrom(pos)
+  }, [startFrom])
 
   const pause = useCallback(() => {
-    tweenRef.current?.pause()
     const l = lenisRef.current
-    if (l) l.start()
+    if (l) l.stop()               // halt Lenis mid-animation
     setPlaying(false)
   }, [])
 
   const restart = useCallback(() => {
-    tweenRef.current?.kill()
-    tweenRef.current = null
     const l = lenisRef.current
-    if (l) l.stop()
-    window.scrollTo(0, 0)
+    if (l) {
+      l.stop()
+      l.scrollTo(0, { immediate: true })
+    }
     setTimeout(() => {
+      const l2 = lenisRef.current
+      if (l2) l2.start()
       setPlaying(true)
       setDone(false)
-      startTween(0)
+      startFrom(0)
     }, 80)
-  }, [startTween])
+  }, [startFrom])
 
   // ── manual-scroll detection → pause temporarily ───────────────────────────
   useEffect(() => {
     const onManual = () => {
       if (!playing) return
-      tweenRef.current?.pause()
-      setPlaying(false)
       const l = lenisRef.current
-      if (l) l.start()
+      if (l) l.stop()
+      setPlaying(false)
 
       clearTimeout(pauseTimer.current)
       pauseTimer.current = setTimeout(() => {
         const l2 = lenisRef.current
-        if (l2) l2.stop()
+        if (l2) l2.start()
+        const pos = lenisRef.current?.scroll ?? window.scrollY
         setPlaying(true)
-        startTween(window.scrollY)
+        startFrom(pos)
       }, PAUSE_MS)
     }
 
@@ -97,14 +91,13 @@ export default function AutoPlay() {
       window.removeEventListener('touchmove', onManual)
       clearTimeout(pauseTimer.current)
     }
-  }, [playing, startTween])
+  }, [playing, startFrom])
 
   // ── cleanup on unmount ────────────────────────────────────────────────────
   useEffect(() => () => {
-    tweenRef.current?.kill()
-    clearTimeout(pauseTimer.current)
     const l = lenisRef.current
-    if (l) l.start()
+    if (l) l.stop()
+    clearTimeout(pauseTimer.current)
   }, [])
 
   // ── button ────────────────────────────────────────────────────────────────
