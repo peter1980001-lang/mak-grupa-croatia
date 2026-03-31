@@ -23,7 +23,7 @@ export default function AquaCityLocation() {
 
   return (
     <div data-section="aquacity-location">
-      <CanvasSection name="aquacity-location" totalFrames={144} height="320vh" zIndex={5} focusX={0.3}>
+      <CanvasSection name="aquacity-location" totalFrames={192} height="320vh" zIndex={5} focusX={0.3}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)',
