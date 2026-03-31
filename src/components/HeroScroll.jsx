@@ -10,6 +10,7 @@ export default function HeroScroll() {
   const textRef = useRef(null)
   const logoRef = useRef(null)
   const subtitleRef = useRef(null)
+  const disclaimerRef = useRef(null)
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -39,6 +40,17 @@ export default function HeroScroll() {
       0.02
     )
     tl.to(subtitleRef.current,
+      { opacity: 0, y: -4, ease: 'none', duration: 0.10 },
+      0.50
+    )
+
+    // Disclaimer: fade in 4→14%, hold, fade out 50→60%
+    tl.fromTo(disclaimerRef.current,
+      { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, ease: 'none', duration: 0.10 },
+      0.04
+    )
+    tl.to(disclaimerRef.current,
       { opacity: 0, y: -4, ease: 'none', duration: 0.10 },
       0.50
     )
@@ -124,6 +136,27 @@ export default function HeroScroll() {
           }}
         >
           Razvoj koncepta i strateških projekata
+        </p>
+
+        <p
+          ref={disclaimerRef}
+          style={{
+            position: 'absolute',
+            bottom: '13%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            color: 'rgba(255,255,255,0.28)',
+            fontSize: 'clamp(0.5rem, 0.85vw, 0.7rem)',
+            fontFamily: 'system-ui, sans-serif',
+            fontWeight: 300,
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            whiteSpace: 'nowrap',
+            opacity: 0,
+            userSelect: 'none',
+          }}
+        >
+          Ova prezentacija je vlasništvo M.A.K Grupe i namijenjena isključivo primatelju | 2026
         </p>
       </div>
     </>
