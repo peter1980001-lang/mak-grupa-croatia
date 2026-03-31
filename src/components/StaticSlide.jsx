@@ -111,6 +111,9 @@ export default function StaticSlide({ id, zIndex, height = '150vh', children }) 
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               willChange: 'transform',
+              // layer1 = base (full opacity), layer2/3 blend into it
+              mixBlendMode: n === 1 ? 'normal' : 'screen',
+              opacity: n === 1 ? 1 : n === 2 ? 0.18 : 0.10,
             }}
           />
         ))}
