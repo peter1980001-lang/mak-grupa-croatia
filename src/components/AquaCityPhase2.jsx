@@ -20,6 +20,8 @@ export default function AquaCityPhase2() {
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.06 }, 0.02)
     tl.fromTo(cardRef.current,
       { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.04)
+    tl.to(cardRef.current,
+      { opacity: 0, y: 40, x: -20, ease: 'none', duration: 0.08 }, 0.92)
     tl.to({}, { duration: 0 }, 1)
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])

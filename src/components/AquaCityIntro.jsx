@@ -17,6 +17,8 @@ export default function AquaCityIntro() {
     })
     tl.fromTo(cardRef.current,
       { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.03)
+    tl.to(cardRef.current,
+      { opacity: 0, y: 40, scale: 0.95, ease: 'none', duration: 0.08 }, 0.92)
     tl.to({}, { duration: 0 }, 1) // anchor timeline to full scroll range
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
