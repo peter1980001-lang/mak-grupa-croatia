@@ -1,28 +1,38 @@
-// src/components/StaticSlide.jsx — full-screen dark "breath" slide between animated sections
+// src/components/StaticSlide.jsx
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// Mouse parallax depth per layer — layer1 slowest (bg), layer3 fastest (fg)
-const MOUSE_DEPTHS = [0.012, 0.026, 0.044]
-
-// Scroll parallax — how many px each layer travels vertically across the full slide scroll
-const SCROLL_TRAVEL = [40, 80, 130]
-
-// Oversize to prevent edge gaps during movement (%)
 const OVERSIZE = 8
 
+// Per-slide config: layer count, mouse depth, scroll travel per layer
+const SLIDE_CONFIG = {
+  'static-identity':        { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-varazdin-transit':{ count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-model':           { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-phases':          { count: 5, depths: [0.006, 0.012, 0.020, 0.030, 0.042], travel: [20, 40, 65, 95, 130] },
+  'static-full-vision':     { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-partnership':     { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-nextstep':        { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-contact':         { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+}
+
 function layerSrc(slideId, n) {
-  if (slideId === 'static-partnership' && n === 1) return `/parallax/${slideId}/layer${n}.jpg`
+  if (n === 1) return `/parallax/${slideId}/layer${n}.webp`
   return `/parallax/${slideId}/layer${n}.png`
 }
 
 export default function StaticSlide({ id, zIndex, height = '150vh', children }) {
   const containerRef = useRef(null)
   const wrapperRef   = useRef(null)
-  const layerRefs    = [useRef(null), useRef(null), useRef(null)]
-  const mouseXY      = useRef({ x: 0, y: 0 })
-  const hasParallax  = Boolean(id)
+  const layerRefs    = useRef([])
+  const hasParallax  = Boolean(id && SLIDE_CONFIG[id])
+  const cfg          = hasParallax ? SLIDE_CONFIG[id] : null
+
+  // Initialise refs array to match layer count
+  if (hasParallax && layerRefs.current.length !== cfg.count) {
+    layerRefs.current = Array.from({ length: cfg.count }, () => ({ current: null }))
+  }
 
   // ── scroll: fade + layer Y travel ────────────────────────────────────────
   useEffect(() => {
@@ -35,19 +45,18 @@ export default function StaticSlide({ id, zIndex, height = '150vh', children }) 
       },
     })
 
-    // Fade in/out
     tl.fromTo(wrapperRef.current,
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.08 }, 0)
     tl.to(wrapperRef.current,
       { opacity: 0, ease: 'none', duration: 0.08 }, 0.92)
 
-    // Scroll parallax — each layer shifts Y as slide scrolls
     if (hasParallax) {
-      layerRefs.forEach((ref, i) => {
+      layerRefs.current.forEach((ref, i) => {
         if (!ref.current) return
+        const travel = cfg.travel[i]
         tl.fromTo(ref.current,
-          { y: -SCROLL_TRAVEL[i] / 2 },
-          { y:  SCROLL_TRAVEL[i] / 2, ease: 'none', duration: 1 },
+          { y: -travel / 2 },
+          { y:  travel / 2, ease: 'none', duration: 1 },
           0
         )
       })
@@ -63,16 +72,13 @@ export default function StaticSlide({ id, zIndex, height = '150vh', children }) 
     const onMove = (e) => {
       const cx = (e.clientX / window.innerWidth  - 0.5) * 2
       const cy = (e.clientY / window.innerHeight - 0.5) * 2
-      mouseXY.current = { x: cx, y: cy }
 
-      layerRefs.forEach((ref, i) => {
+      layerRefs.current.forEach((ref, i) => {
         if (!ref.current) return
-        const depth = MOUSE_DEPTHS[i]
-        const mx = -cx * depth * window.innerWidth
-        const my = -cy * depth * window.innerHeight
+        const mx = -cx * cfg.depths[i] * window.innerWidth
         gsap.to(ref.current, {
           x: mx,
-          duration: 1.1 + i * 0.3,
+          duration: 1.0 + i * 0.25,
           ease: 'power2.out',
           overwrite: 'auto',
         })
@@ -100,21 +106,23 @@ export default function StaticSlide({ id, zIndex, height = '150vh', children }) 
           overflow: 'hidden',
         }}
       >
-        {hasParallax && [1, 2, 3].map((n, i) => (
-          <div
-            key={n}
-            ref={layerRefs[i]}
-            style={{
-              position: 'absolute',
-              inset: `-${OVERSIZE}%`,
-              backgroundImage: `url(${layerSrc(id, n)})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              willChange: 'transform',
-              opacity: 1,
-            }}
-          />
-        ))}
+        {hasParallax && Array.from({ length: cfg.count }, (_, i) => {
+          const n = i + 1
+          return (
+            <div
+              key={n}
+              ref={el => layerRefs.current[i] = { current: el }}
+              style={{
+                position: 'absolute',
+                inset: n === 1 ? 0 : `-${OVERSIZE}%`,
+                backgroundImage: `url(${layerSrc(id, n)})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                willChange: 'transform',
+              }}
+            />
+          )
+        })}
 
         <div style={{
           position: 'relative',
