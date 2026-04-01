@@ -8,7 +8,7 @@ const OVERSIZE = 8
 // Per-slide config: layer count, mouse depth, scroll travel per layer
 const SLIDE_CONFIG = {
   'static-identity':        { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
-  'static-varazdin-transit':{ count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
+  'static-varazdin-transit':{ count: 7, depths: [0.006, 0.010, 0.016, 0.022, 0.030, 0.038, 0.048], travel: [20, 35, 52, 70, 90, 112, 138] },
   'static-model':           { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
   'static-phases':          { count: 5, depths: [0.006, 0.012, 0.020, 0.030, 0.042], travel: [20, 40, 65, 95, 130] },
   'static-full-vision':     { count: 4, depths: [0.006, 0.014, 0.024, 0.036], travel: [20, 45, 75, 110] },
