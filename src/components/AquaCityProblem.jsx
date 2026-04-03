@@ -38,36 +38,36 @@ export default function AquaCityProblem() {
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '540px', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
-              color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
+              color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>AquaCity danas</p>
             <h2 style={{
-              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+              color: '#f5f3ea', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
               fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
               Jezero postoji.<br />
-              <span style={{ fontWeight: 600 }}>Potencijal ne.</span>
+              <span style={{ fontWeight: 600 }}>Potencijal nije iskorišten.</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.8rem 0' }}>
-              {['Sadržaj ograničen na obalu', 'Jezero nema aktivnu ulogu', 'Kratki boravci, ograničena potrošnja'].map((item) => (
+              {['Aktivnost ograničena na obalu', 'Jezero nema aktivnu ulogu', 'Kratki boravci, mala potrošnja'].map((item) => (
                 <li key={item} style={{
-                  color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                  color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
                   display: 'flex', alignItems: 'center', gap: '0.75rem',
                 }}>
-                  <span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>{item}
+                  <span style={{ color: '#c8a96a', fontSize: '0.6em' }}>■</span>{item}
                 </li>
               ))}
             </ul>
             <p style={{
-              color: 'rgba(240,235,224,0.92)', fontSize: 'clamp(1rem, 1.8vw, 1.3rem)',
+              color: 'rgba(245,243,234,0.92)', fontSize: 'clamp(1rem, 1.8vw, 1.3rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, letterSpacing: '0.05em',
-              borderTop: '1px solid rgba(201,168,76,0.4)', paddingTop: '1rem', margin: 0,
+              borderTop: '1px solid rgba(200,169,106,0.4)', paddingTop: '1rem', margin: 0,
             }}>
               Lokacija je snaga —{' '}
-              <span style={{ color: '#c9a84c', fontWeight: 500 }}>iskorištenje je slabost</span>
+              <span style={{ color: '#c8a96a', fontWeight: 500 }}>iskorištenje je slabost</span>
             </p>
           </GlassBox>
         </div>

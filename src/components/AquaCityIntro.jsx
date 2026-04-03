@@ -33,12 +33,12 @@ export default function AquaCityIntro() {
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '10%', left: '8%', width: 'min(84%, 640px)', textAlign: 'left', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem',  }}>
             <p style={{
-              color: '#c9a84c', fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)',
+              color: '#c8a96a', fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1rem',
             }}>AquaCity Varaždin</p>
             <h2 style={{
-              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2.2rem, 4.8vw, 4rem)',
+              color: '#f5f3ea', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2.2rem, 4.8vw, 4rem)',
               fontWeight: 300,
               lineHeight: 1.15, letterSpacing: '-0.02em', margin: 0,
             }}>
@@ -47,7 +47,7 @@ export default function AquaCityIntro() {
               <span style={{ fontWeight: 600 }}>destinacije</span>
             </h2>
             <p style={{
-              color: 'rgba(240,235,224,0.50)', fontSize: 'clamp(0.65rem, 0.95vw, 0.8rem)',
+              color: 'rgba(245,243,234,0.50)', fontSize: 'clamp(0.65rem, 0.95vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300,
               letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: '1.5rem',
             }}>Vizija razvoja M.A.K Grupe · 2026</p>

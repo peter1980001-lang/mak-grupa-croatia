@@ -22,7 +22,7 @@ function layerSrc(slideId, n) {
   return `/parallax/${slideId}/layer${n}.png`
 }
 
-export default function StaticSlide({ id, zIndex, height = '150vh', bg = '#0d0e0b', children }) {
+export default function StaticSlide({ id, zIndex, height = '150vh', bg = '#0f2a23', children }) {
   const containerRef = useRef(null)
   const wrapperRef   = useRef(null)
   const layerRefs    = useRef([])

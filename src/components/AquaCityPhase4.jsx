@@ -36,35 +36,35 @@ export default function AquaCityPhase4() {
 
         <div ref={phaseRef} style={{ position: 'absolute', top: '8%', left: '8%', opacity: 0 }}>
           <span style={{
-            color: '#c9a84c', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
+            color: '#c8a96a', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
             fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.35em', textTransform: 'uppercase',
-            borderLeft: '3px solid #c9a84c', paddingLeft: '1rem', textShadow: '0 0 18px rgba(201,168,76,0.5)',
-          }}>Faza 4</span>
+            borderLeft: '3px solid #c8a96a', paddingLeft: '1rem', textShadow: '0 0 18px rgba(200,169,106,0.5)',
+          }}>Faza 4 — Wellness & Fitness</span>
         </div>
 
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '8%', left: '8%', width: 'min(84%, 500px)', textAlign: 'left', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
-              color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
+              color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Wellness & Fitness</p>
             <h2 style={{
-              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+              color: '#f5f3ea', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
               fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
               Aktivni odmor —<br /><span style={{ fontWeight: 600 }}>cijele godine</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['Sauna i spa uz jezero', 'Outdoor fitness zona', 'Aktivan odmor svaki dan'].map((item) => (
+              {['Sauna i spa uz jezero', 'Outdoor fitness zona', 'Sadržaj izvan ljetne sezone', 'Novo iskustvo za građane i posjetitelje'].map((item) => (
                 <li key={item} style={{
-                  color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                  color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
                   display: 'flex', alignItems: 'center', gap: '0.75rem',
                 }}>
-                  <span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>{item}
+                  <span style={{ color: '#c8a96a', fontSize: '0.6em' }}>■</span>{item}
                 </li>
               ))}
             </ul>
