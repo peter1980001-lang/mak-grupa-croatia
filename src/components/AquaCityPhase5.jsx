@@ -55,7 +55,7 @@ export default function AquaCityPhase5() {
               fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
-              Glamping i plutajući<br /><span style={{ fontWeight: 600 }}>bungalovi</span>
+              Boravak postaje<br /><span style={{ fontWeight: 600 }}>noćenje</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               {['Plutajući bungalovi na jezeru', 'Glamping s premium uslugom', 'Produžen boravak gostiju', 'Nova vrijednost po posjetitelju'].map((item) => (

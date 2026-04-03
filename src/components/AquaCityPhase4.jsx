@@ -55,7 +55,7 @@ export default function AquaCityPhase4() {
               fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
-              Aktivni odmor —<br /><span style={{ fontWeight: 600 }}>cijele godine</span>
+              Aktivni odmor —<br /><span style={{ fontWeight: 600 }}>tijekom cijele godine</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Sauna i spa uz jezero', 'Outdoor fitness zona', 'Sadržaj izvan ljetne sezone', 'Novo iskustvo za građane i posjetitelje'].map((item) => (

@@ -103,7 +103,7 @@ export default function HomePage() {
           SLIDE 7–8  |  Strateška pozicija  |  z 6
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-varazdin-transit" zIndex={6} height="290vh">
-        <GlassBox style={{ maxWidth: '620px', padding: '2.8rem 3.2rem' }}>
+        <GlassBox style={{ maxWidth: '560px', padding: '2.8rem 3.2rem', position: 'absolute', bottom: '8%', left: '8%' }}>
           <p style={T.label}>Strateška pozicija</p>
           <h2 style={{ ...T.h2, marginBottom: '1.8rem' }}>
             Varaždin kao točka prolaza —<br />
@@ -199,27 +199,6 @@ export default function HomePage() {
       ══════════════════════════════════════════════════════════════════════ */}
       <AquaCityPhase1 />
 
-      <StaticSlide zIndex={10} height="300vh">
-        <GlassBox style={{ maxWidth: '600px', textAlign: 'center', padding: '2.8rem 3.2rem' }}>
-          <p style={T.label}>Vremenski okvir</p>
-          <h2 style={{ ...T.h2, fontSize: 'clamp(1.8rem, 3.2vw, 2.8rem)', marginBottom: '1.6rem' }}>
-            Brza i kontrolirana<br />
-            <span style={T.gold}>implementacija</span>
-          </h2>
-          <ul style={{ padding: 0, margin: '0 0 1.6rem 0', textAlign: 'left' }}>
-            {[
-              'Faza 1: unutar 2 mjeseca od odobrenja i dozvola',
-              'Daljnje faze razvijaju se postupno, uz potrebna odobrenja',
-              'Svaki korak temeljen na stvarnim rezultatima',
-            ].map(t => <Bullet key={t}>{t}</Bullet>)}
-          </ul>
-          <div style={T.divider} />
-          <p style={{ ...T.body, color: 'rgba(245,243,234,0.80)', fontSize: 'clamp(0.85rem, 1.3vw, 1rem)', margin: 0, fontStyle: 'italic' }}>
-            Projekt se razvija u skladu s propisima i u suradnji s nadležnim tijelima
-          </p>
-        </GlassBox>
-      </StaticSlide>
-
       {/* ══════════════════════════════════════════════════════════════════════
           Phase 2  |  z 11
       ══════════════════════════════════════════════════════════════════════ */}
@@ -244,7 +223,7 @@ export default function HomePage() {
           Cjelovita vizija  |  z 15
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-full-vision" zIndex={15} height="470vh">
-        <GlassBox style={{ maxWidth: '640px', textAlign: 'center', padding: '3rem 3.5rem' }}>
+        <GlassBox style={{ maxWidth: '580px', textAlign: 'left', padding: '3rem 3.5rem', position: 'absolute', top: '12%', left: '8%' }}>
           <p style={T.label}>Cjelovita vizija</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.8rem' }}>
             AquaCity postaje<br />

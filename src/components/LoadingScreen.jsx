@@ -55,19 +55,6 @@ export default function LoadingScreen() {
       pointerEvents:  fading ? 'none' : 'all',
     }}>
 
-      {/* Logo */}
-      <img
-        src={logoSrc}
-        alt="MAK Grupa"
-        style={{
-          width:               'clamp(160px, 22vw, 280px)',
-          userSelect:          'none',
-          pointerEvents:       'none',
-          maskImage:           'radial-gradient(ellipse 62% 68% at 50% 50%, black 35%, transparent 80%)',
-          WebkitMaskImage:     'radial-gradient(ellipse 62% 68% at 50% 50%, black 35%, transparent 80%)',
-        }}
-      />
-
       {/* Text + progress bar */}
       <div style={{ textAlign: 'center' }}>
         <p style={{
