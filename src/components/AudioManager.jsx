@@ -20,7 +20,7 @@ export default function AudioManager() {
     audio.volume     = 0
     audioRef.current = audio
 
-    const fadeIn = () => {
+    const fadeInStart = () => {
       let step = 0
       const interval = FADE_MS / FADE_STEPS
       const timer = setInterval(() => {
@@ -37,7 +37,7 @@ export default function AudioManager() {
       startedRef.current = true
       audio.play().then(() => {
         setStarted(true)
-        fadeIn()
+        fadeInStart()
       }).catch(() => {
         startedRef.current = false // allow retry on next interaction
       })
