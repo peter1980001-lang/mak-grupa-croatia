@@ -57,7 +57,7 @@ export default function AquaCityPhase5() {
             }}>
               Boravak postaje<br /><span style={{ fontWeight: 600 }}>noćenje</span>
             </h2>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Plutajući bungalovi na jezeru', 'Glamping s premium uslugom', 'Produžen boravak gostiju', 'Nova vrijednost po posjetitelju'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
