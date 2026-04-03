@@ -222,7 +222,7 @@ export default function HomePage() {
           SLIDE 14  |  5-phase timeline  |  z 9
           PDF p.14
       ══════════════════════════════════════════════════════════════════════ */}
-      <StaticSlide id="static-phases" zIndex={9} height="530vh">
+      <StaticSlide id="static-phases" zIndex={9} height="530vh" bg="#0e1f1a">
         <GlassBox style={{ maxWidth: '800px', padding: '3rem 3.5rem' }}>
           <p style={{ ...T.label, textAlign: 'center', marginBottom: '1.6rem' }}>Plan razvoja</p>
           <h2 style={{ ...T.h2, textAlign: 'center', marginBottom: '2.4rem', fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>
