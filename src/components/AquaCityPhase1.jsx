@@ -40,7 +40,7 @@ export default function AquaCityPhase1() {
 
   return (
     <div data-section="aquacity-phase1">
-      <CanvasSection name="aquacity-phase1" totalFrames={192} height="700vh" zIndex={10} focusX={0.25} holdLastRatio={0.14}>
+      <CanvasSection name="aquacity-phase1" totalFrames={192} height="500vh" zIndex={10} focusX={0.25} holdLastRatio={0.14}>
 
         {/* Left overlay for card 1 */}
         <div style={{

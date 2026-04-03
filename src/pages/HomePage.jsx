@@ -133,7 +133,7 @@ export default function HomePage() {
           SLIDE 11–13  |  Model razvoja  |  z 8
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-model" zIndex={8} height="550vh">
-        <GlassBox style={{ maxWidth: '780px', padding: '3rem 3.5rem' }}>
+        <GlassBox style={{ maxWidth: '680px', padding: '3rem 3.5rem', position: 'absolute', top: '8%', left: '8%' }}>
           <p style={T.label}>Model razvoja</p>
           <h2 style={{ ...T.h2, marginBottom: '2.2rem' }}>
             Kontroliran. Siguran.<br />
@@ -223,9 +223,9 @@ export default function HomePage() {
           Cjelovita vizija  |  z 15
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-full-vision" zIndex={15} height="470vh">
-        <GlassBox style={{ maxWidth: '580px', textAlign: 'left', padding: '3rem 3.5rem', position: 'absolute', top: '12%', left: '8%' }}>
+        <GlassBox style={{ maxWidth: '493px', textAlign: 'left', padding: '2.55rem 3rem', position: 'absolute', top: '12%', left: '8%' }}>
           <p style={T.label}>Cjelovita vizija</p>
-          <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.8rem' }}>
+          <h2 style={{ ...T.h2, fontSize: 'clamp(1.9rem, 3.4vw, 2.9rem)', marginBottom: '1.5rem' }}>
             AquaCity postaje<br />
             <span style={T.gold}>mjesto ostanka</span>
           </h2>
