@@ -28,7 +28,7 @@ export default function AquaCityPhase2() {
 
   return (
     <div data-section="aquacity-phase2">
-      <CanvasSection name="aquacity-phase2" totalFrames={240} height="280vh" zIndex={11} focusX={0.18}>
+      <CanvasSection name="aquacity-phase2" totalFrames={192} height="280vh" zIndex={11} focusX={0.18}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.4) 100%)',

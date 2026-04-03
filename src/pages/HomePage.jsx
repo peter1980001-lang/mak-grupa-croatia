@@ -82,7 +82,7 @@ export default function HomePage() {
           PDF p.3
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-identity" zIndex={3} height="160vh">
-        <GlassBox style={{ maxWidth: '700px', textAlign: 'center', padding: '3rem 3.5rem' }}>
+        <GlassBox style={{ maxWidth: '700px', textAlign: 'left', padding: '3rem 3.5rem', position: 'absolute', bottom: '8%', left: '6%' }}>
           <p style={T.label}>AquaCity Varaždin</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.6rem' }}>
             Mjesto koje generacije<br />
@@ -232,7 +232,7 @@ export default function HomePage() {
             {[
               { faza: 'Faza 1', title: 'Aktivacija vode i društvenih sadržaja', desc: 'Električni PLJUS brodići, plutajuće platforme — jezero postaje aktivan prostor boravka' },
               { faza: 'Faza 2', title: 'Večernji sadržaji i kino', desc: 'LED ekran na vodi, filmovi, sport i kulturna događanja — AquaCity aktivan dan i noć' },
-              { faza: 'Faza 3', title: 'Aktivne vodene atrakcije', desc: 'Napuhavajući vodeni park, 30+ atrakcija — nova razina atraktivnosti i ponovnih dolazaka' },
+              { faza: 'Faza 3', title: 'Aktivne vodene atrakcije', desc: 'Napuhavajući vodeni park, 20+ atrakcija — nova razina atraktivnosti i ponovnih dolazaka' },
               { faza: 'Faza 4', title: 'Wellness i Fitness', desc: 'Sauna, spa, outdoor fitness uz jezero — cjelogodišnja rutina, ne samo sezonski posjet' },
               { faza: 'Faza 5', title: 'Smještaj na jezeru', desc: 'Glamping, plutajući bungalovi — posjet postaje boravak, viša vrijednost po gostu' },
             ].map(({ faza, title, desc }, i) => (

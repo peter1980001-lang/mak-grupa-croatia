@@ -62,7 +62,7 @@ export default function AquaCityPhase3() {
               Aquapark na jezeru —<br /><span style={{ fontWeight: 600 }}>za sve uzraste</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['30+ vodenih atrakcija', 'Napuhavajuće platforme i tobogani', 'Najposjećeniji park u regiji'].map((item) => (
+              {['20+ vodenih atrakcija', 'Napuhavajuće platforme i tobogani', 'Najposjećeniji park u regiji'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: 'system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
