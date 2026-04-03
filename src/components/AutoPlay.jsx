@@ -38,17 +38,19 @@ export default function AutoPlay() {
   // ── start / pause / restart ───────────────────────────────────────────────
   const start = useCallback(() => {
     const l = lenisRef.current
-    if (l) l.start()              // ensure Lenis is running
+    if (l) l.start()
     const pos = lenisRef.current?.scroll ?? window.scrollY
     setPlaying(true)
     setDone(false)
+    window.dispatchEvent(new CustomEvent('autoplay:resume'))
     startFrom(pos)
   }, [startFrom])
 
   const pause = useCallback(() => {
     const l = lenisRef.current
-    if (l) l.stop()               // halt Lenis mid-animation
+    if (l) l.stop()
     setPlaying(false)
+    window.dispatchEvent(new CustomEvent('autoplay:pause'))
   }, [])
 
   const restart = useCallback(() => {
@@ -62,6 +64,7 @@ export default function AutoPlay() {
       if (l2) l2.start()
       setPlaying(true)
       setDone(false)
+      window.dispatchEvent(new CustomEvent('autoplay:resume'))
       startFrom(0)
     }, 80)
   }, [startFrom])

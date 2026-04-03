@@ -46,14 +46,42 @@ export default function AudioManager() {
     // 'lenis:scroll' is dispatched by SmoothScroll on first Lenis scroll tick.
     // touchstart is intentionally excluded — it fires on first tap before any
     // scrolling intent, causing auto-start on mobile.
-    window.addEventListener('lenis:scroll', start)
-    window.addEventListener('keydown',      start)
+    const fadeOut = () => {
+      if (mutedRef.current) return
+      const from = audio.volume
+      let step = 0
+      const timer = setInterval(() => {
+        step++
+        audio.volume = Math.max(0, from * (1 - step / 20))
+        if (step >= 20) clearInterval(timer)
+      }, 30)
+    }
+
+    const fadeIn = () => {
+      if (mutedRef.current) return
+      let vol = audio.volume
+      const timer = setInterval(() => {
+        vol = Math.min(TARGET_VOL, vol + TARGET_VOL / 30)
+        audio.volume = vol
+        if (vol >= TARGET_VOL) clearInterval(timer)
+      }, 50)
+    }
+
+    const onAutoPause  = () => fadeOut()
+    const onAutoResume = () => { if (startedRef.current) fadeIn() }
+
+    window.addEventListener('lenis:scroll',    start)
+    window.addEventListener('keydown',         start)
+    window.addEventListener('autoplay:pause',  onAutoPause)
+    window.addEventListener('autoplay:resume', onAutoResume)
 
     return () => {
       audio.pause()
       audio.src = ''
-      window.removeEventListener('lenis:scroll', start)
-      window.removeEventListener('keydown',      start)
+      window.removeEventListener('lenis:scroll',    start)
+      window.removeEventListener('keydown',         start)
+      window.removeEventListener('autoplay:pause',  onAutoPause)
+      window.removeEventListener('autoplay:resume', onAutoResume)
     }
   }, [])
 

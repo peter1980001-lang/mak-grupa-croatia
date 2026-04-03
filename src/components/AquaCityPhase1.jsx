@@ -19,16 +19,16 @@ export default function AquaCityPhase1() {
     tl.fromTo(phaseRef.current,
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.06 }, 0.02)
     tl.fromTo(cardRef.current,
-      { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.04)
+      { opacity: 0, y: -18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.04)
     tl.to(cardRef.current,
-      { opacity: 0, y: 45, scale: 0.96, ease: 'none', duration: 0.08 }, 0.92)
+      { opacity: 0, y: -40, x: 30, ease: 'none', duration: 0.08 }, 0.92)
     tl.to({}, { duration: 0 }, 1)
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
 
   return (
     <div data-section="aquacity-phase1">
-      <CanvasSection name="aquacity-phase1" totalFrames={192} height="320vh" zIndex={10} focusX={0.25}>
+      <CanvasSection name="aquacity-phase1" totalFrames={192} height="370vh" zIndex={10} focusX={0.25} holdLastRatio={0.14}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)',
@@ -40,23 +40,23 @@ export default function AquaCityPhase1() {
 
         <div ref={phaseRef} style={{ position: 'absolute', top: '8%', left: '8%', opacity: 0 }}>
           <span style={{
-            color: '#c9a84c', fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)',
-            fontFamily: 'system-ui, sans-serif', fontWeight: 400,
-            letterSpacing: '0.3em', textTransform: 'uppercase',
-            borderLeft: '2px solid #c9a84c', paddingLeft: '0.75rem',
+            color: '#c9a84c', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
+            fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
+            letterSpacing: '0.35em', textTransform: 'uppercase',
+            borderLeft: '3px solid #c9a84c', paddingLeft: '1rem', textShadow: '0 0 18px rgba(201,168,76,0.5)',
           }}>Faza 1</span>
         </div>
 
-        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '4%', left: '8%', width: 'min(84%, 520px)', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '12%', right: '8%', width: 'min(84%, 520px)', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 400,
+              fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Aktivacija jezera</p>
             <h2 style={{
-              color: '#ffffff', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 300,
+              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+              fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
               Jezero postaje<br /><span style={{ fontWeight: 600 }}>prostor boravka</span>
@@ -64,8 +64,8 @@ export default function AquaCityPhase1() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Električni PLJUS brodići', 'Plutajuće platforme na vodi', 'Novo iskustvo za posjetitelje'].map((item) => (
                 <li key={item} style={{
-                  color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-                  fontFamily: 'system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
+                  color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                  fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
                   display: 'flex', alignItems: 'center', gap: '0.75rem',
                 }}>
                   <span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>{item}

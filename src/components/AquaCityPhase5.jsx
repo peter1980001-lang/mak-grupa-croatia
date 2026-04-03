@@ -21,7 +21,7 @@ export default function AquaCityPhase5() {
     tl.fromTo(cardRef.current,
       { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.04)
     tl.to(cardRef.current,
-      { opacity: 0, y: -30, ease: 'none', duration: 0.08 }, 0.92)
+      { opacity: 0, y: 40, x: -20, ease: 'none', duration: 0.08 }, 0.92)
     tl.to({}, { duration: 0 }, 1)
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())
   }, [])
@@ -36,23 +36,23 @@ export default function AquaCityPhase5() {
 
         <div ref={phaseRef} style={{ position: 'absolute', top: '8%', left: '8%', opacity: 0 }}>
           <span style={{
-            color: '#c9a84c', fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)',
-            fontFamily: 'system-ui, sans-serif', fontWeight: 400,
-            letterSpacing: '0.3em', textTransform: 'uppercase',
-            borderLeft: '2px solid #c9a84c', paddingLeft: '0.75rem',
+            color: '#c9a84c', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
+            fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
+            letterSpacing: '0.35em', textTransform: 'uppercase',
+            borderLeft: '3px solid #c9a84c', paddingLeft: '1rem', textShadow: '0 0 18px rgba(201,168,76,0.5)',
           }}>Faza 5</span>
         </div>
 
-        <div ref={cardRef} className="slide-card slide-card--center" style={{ position: 'absolute', bottom: '12%', left: '50%', transform: 'translateX(-50%)', maxWidth: '600px', textAlign: 'center', opacity: 0 }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', bottom: '8%', left: '8%', maxWidth: '540px', textAlign: 'left', opacity: 0 }}>
           <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 3rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 400,
+              fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Smještaj na jezeru</p>
             <h2 style={{
-              color: '#ffffff', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 300,
+              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+              fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
               Glamping i plutajući<br /><span style={{ fontWeight: 600 }}>bungalovi</span>
@@ -60,8 +60,8 @@ export default function AquaCityPhase5() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               {['Plutajući bungalovi na jezeru', 'Glamping kamp s premium uslugom', 'Doživljaj noći nad vodom'].map((item) => (
                 <li key={item} style={{
-                  color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-                  fontFamily: 'system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
+                  color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                  fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
                   display: 'flex', alignItems: 'center', gap: '0.75rem',
                 }}>
                   <span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>{item}

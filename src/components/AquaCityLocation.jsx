@@ -38,12 +38,12 @@ export default function AquaCityLocation() {
           <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 400,
+              fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Strateška lokacija</p>
             <h2 style={{
-              color: '#ffffff', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 300,
+              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+              fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
               Rijetka prednost<br />
@@ -52,8 +52,8 @@ export default function AquaCityLocation() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Prirodno jezero blizu urbanog središta', 'Zagreb · Slovenija · Austrija', 'Promet i vidljivost već postoje'].map((item) => (
                 <li key={item} style={{
-                  color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-                  fontFamily: 'system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
+                  color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                  fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
                   display: 'flex', alignItems: 'center', gap: '0.75rem',
                 }}>
                   <span style={{ color: '#c9a84c', fontSize: '0.6em' }}>■</span>{item}

@@ -34,15 +34,15 @@ export default function AquaCityVision() {
           position: 'absolute', top: '23%', left: '8%',
           textAlign: 'center', width: 'min(84%, 700px)', opacity: 0,
         }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem', background: 'rgba(8, 12, 8, 0.72)', border: '1px solid rgba(255,255,255,0.10)' }}>
+          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem',  }}>
             <p style={{
               color: '#c9a84c', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 400,
+              fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Vizija</p>
             <h2 style={{
-              color: '#ffffff', fontSize: 'clamp(2.2rem, 4.2vw, 3.6rem)',
-              fontFamily: 'system-ui, sans-serif', fontWeight: 300,
+              color: '#f0ebe0', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2.2rem, 4.2vw, 3.6rem)',
+              fontWeight: 300,
               lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 2rem 0',
             }}>
               Iz mjesta dolaska<br />u <span style={{ fontWeight: 600 }}>destinaciju ostanka</span>
@@ -52,12 +52,12 @@ export default function AquaCityVision() {
                 <div key={p.n} style={{ textAlign: 'center' }}>
                   <p style={{
                     color: '#c9a84c', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
-                    fontFamily: 'system-ui, sans-serif', fontWeight: 600,
+                    fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 600,
                     letterSpacing: '0.05em', margin: '0 0 0.3rem 0',
                   }}>{p.n}</p>
                   <p style={{
-                    color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)',
-                    fontFamily: 'system-ui, sans-serif', fontWeight: 300,
+                    color: 'rgba(240,235,224,0.70)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)',
+                    fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300,
                     letterSpacing: '0.1em', textTransform: 'uppercase',
                   }}>{p.label}</p>
                 </div>

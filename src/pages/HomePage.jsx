@@ -21,21 +21,21 @@ import LoadingScreen    from '../components/LoadingScreen'
 const T = {
   label: {
     color: '#c9a84c', fontSize: 'clamp(0.6rem, 0.95vw, 0.78rem)',
-    fontFamily: 'system-ui, sans-serif', fontWeight: 400,
+    fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
     letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 1rem 0',
   },
   h2: {
-    color: '#ffffff', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
-    fontFamily: 'system-ui, sans-serif', fontWeight: 300,
-    lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.4rem 0',
+    color: '#f0ebe0', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+    fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 300,
+    lineHeight: 1.15, letterSpacing: '0.01em', margin: '0 0 1.4rem 0',
   },
   h3: {
-    color: '#ffffff', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)',
-    fontFamily: 'system-ui, sans-serif', fontWeight: 500, margin: '0 0 0.5rem 0',
+    color: '#f0ebe0', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)',
+    fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 500, margin: '0 0 0.5rem 0',
   },
   body: {
-    color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.82rem, 1.25vw, 0.96rem)',
-    fontFamily: 'system-ui, sans-serif', fontWeight: 300,
+    color: 'rgba(240,235,224,0.65)', fontSize: 'clamp(0.82rem, 1.25vw, 0.96rem)',
+    fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300,
     lineHeight: 1.7, margin: 0,
   },
   gold: { color: '#c9a84c' },
@@ -45,8 +45,8 @@ const T = {
 function Bullet({ children }) {
   return (
     <li style={{
-      color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.88rem, 1.35vw, 1.02rem)',
-      fontFamily: 'system-ui, sans-serif', fontWeight: 300, marginBottom: '0.55rem',
+      color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.88rem, 1.35vw, 1.02rem)',
+      fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.55rem',
       display: 'flex', alignItems: 'flex-start', gap: '0.75rem', listStyle: 'none',
     }}>
       <span style={{ color: '#c9a84c', fontSize: '0.55em', marginTop: '0.45em', flexShrink: 0 }}>■</span>
@@ -93,7 +93,7 @@ export default function HomePage() {
             Generacije dolaze ovdje plivati, opuštati se i provoditi vrijeme s obitelji.
           </p>
           <div style={T.divider} />
-          <p style={{ ...T.body, fontSize: 'clamp(1rem, 1.5vw, 1.1rem)', color: 'rgba(255,255,255,0.85)', fontStyle: 'italic' }}>
+          <p style={{ ...T.body, fontSize: 'clamp(1rem, 1.5vw, 1.1rem)', color: 'rgba(240,235,224,0.90)', fontStyle: 'italic' }}>
             "AquaCity nije samo lokacija. To je dio Varaždina."
           </p>
         </GlassBox>
@@ -145,7 +145,7 @@ export default function HomePage() {
             </div>
           </div>
           <div style={T.divider} />
-          <p style={{ ...T.body, color: 'rgba(255,255,255,0.8)', textAlign: 'center', fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)' }}>
+          <p style={{ ...T.body, color: 'rgba(240,235,224,0.85)', textAlign: 'center', fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)' }}>
             AquaCity ima sve elemente —<br />
             <span style={T.gold}>nedostaje sadržaj koji produžuje boravak.</span>
           </p>
@@ -242,17 +242,17 @@ export default function HomePage() {
                 borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.06)' : 'none',
               }}>
                 <div style={{ minWidth: '64px', paddingTop: '0.1rem' }}>
-                  <span style={{ color: '#c9a84c', fontSize: 'clamp(0.55rem, 0.85vw, 0.7rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', display: 'block' }}>{faza}</span>
+                  <span style={{ color: '#c9a84c', fontSize: 'clamp(0.55rem, 0.85vw, 0.7rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', display: 'block' }}>{faza}</span>
                 </div>
                 <div>
-                  <p style={{ color: '#ffffff', fontSize: 'clamp(0.9rem, 1.35vw, 1.02rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 500, margin: '0 0 0.25rem 0' }}>{title}</p>
+                  <p style={{ color: '#ffffff', fontSize: 'clamp(0.9rem, 1.35vw, 1.02rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 500, margin: '0 0 0.25rem 0' }}>{title}</p>
                   <p style={{ ...T.body, fontSize: 'clamp(0.78rem, 1.1vw, 0.9rem)' }}>{desc}</p>
                 </div>
               </div>
             ))}
           </div>
           <div style={T.divider} />
-          <p style={{ ...T.body, textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 'clamp(0.78rem, 1.1vw, 0.9rem)' }}>
+          <p style={{ ...T.body, textAlign: 'center', color: 'rgba(240,235,224,0.55)', fontSize: 'clamp(0.78rem, 1.1vw, 0.9rem)' }}>
             Razvoj ide od jednostavnih prema kompleksnijim sadržajima — smještaj dolazi tek kao završni korak, nakon što destinacija već funkcionira.
           </p>
         </GlassBox>
@@ -294,7 +294,7 @@ export default function HomePage() {
             AquaCity postaje<br />
             <span style={T.gold}>mjesto ostanka</span>
           </h2>
-          <p style={{ ...T.body, marginBottom: '2rem', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: 'rgba(255,255,255,0.8)' }}>
+          <p style={{ ...T.body, marginBottom: '2rem', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: 'rgba(240,235,224,0.85)' }}>
             Kombinacijom svih pet faza, AquaCity postaje prostor kontinuiranog korištenja —
             aktivan dan, večer i cijelu godinu.
           </p>
@@ -340,7 +340,7 @@ export default function HomePage() {
                 { role: 'Investitori', items: ['Privatni kapital', 'Fazno ulaganje', 'Kontroliran rizik'] },
               ].map(({ role, items }) => (
                 <div key={role}>
-                  <p style={{ ...T.body, color: 'rgba(255,255,255,0.4)', fontSize: 'clamp(0.6rem, 0.85vw, 0.72rem)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{role}</p>
+                  <p style={{ ...T.body, color: 'rgba(240,235,224,0.45)', fontSize: 'clamp(0.6rem, 0.85vw, 0.72rem)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{role}</p>
                   <ul style={{ padding: 0, margin: 0 }}>
                     {items.map(i => <Bullet key={i}>{i}</Bullet>)}
                   </ul>
@@ -396,7 +396,7 @@ export default function HomePage() {
             Pokretanje<br />
             <span style={T.gold}>Faze 1</span>
           </h2>
-          <p style={{ ...T.body, marginBottom: '2rem', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: 'rgba(255,255,255,0.8)' }}>
+          <p style={{ ...T.body, marginBottom: '2rem', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: 'rgba(240,235,224,0.85)' }}>
             Projekt je spreman za prelazak iz koncepta u provedbu.
             Sljedeći korak je pokretanje prve, ograničene faze.
           </p>
@@ -451,14 +451,14 @@ export default function HomePage() {
               {['Fazan', 'Kontroliran', 'Financijski održiv'].map(t => (
                 <div key={t} style={{ textAlign: 'center' }}>
                   <span style={{ color: '#c9a84c', fontSize: '1rem', display: 'block', marginBottom: '0.3rem' }}>◈</span>
-                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 300, margin: 0 }}>{t}</p>
+                  <p style={{ color: 'rgba(240,235,224,0.75)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, margin: 0 }}>{t}</p>
                 </div>
               ))}
             </div>
             <div style={{ borderTop: '1px solid rgba(201,168,76,0.3)', paddingTop: '1.6rem' }}>
-              <p style={{ color: '#ffffff', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)', fontFamily: 'system-ui, sans-serif', fontWeight: 400, margin: '0 0 0.25rem 0' }}>Mario Kukec</p>
+              <p style={{ color: '#f0ebe0', fontFamily: '"DM Sans", system-ui, sans-serif', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)', fontWeight: 400, margin: '0 0 0.25rem 0' }}>Mario Kukec</p>
               <p style={{ ...T.body, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)', marginBottom: '1.1rem' }}>Direktor · M.A.K Grupa d.o.o.</p>
-              <p style={{ ...T.body, lineHeight: 2.2, color: 'rgba(255,255,255,0.65)' }}>
+              <p style={{ ...T.body, lineHeight: 2.2, color: 'rgba(240,235,224,0.70)' }}>
                 <span style={T.gold}>mario@makgrupa.com</span><br />
                 +971 55 129 1080 · www.makgrupa.com
               </p>

@@ -8,11 +8,10 @@ export default function CanvasSection({
   totalFrames,
   height = '320vh',
   zIndex = 1,
-  // focusX / focusY: 0 = left/top, 0.5 = center (default), 1 = right/bottom
-  // On portrait mobile the frame is wider than the viewport; these shift the
-  // visible crop area so the important part of each video stays on screen.
   focusX = 0.5,
   focusY = 0.5,
+  // holdLastRatio: fraction of scroll (0–1) reserved for holding the last frame
+  holdLastRatio = 0,
   children,
 }) {
   const containerRef = useRef(null)
@@ -67,8 +66,11 @@ export default function CanvasSection({
       end: 'bottom top',
       scrub: true,
       onUpdate: (self) => {
-        const ratio = self.progress
-        const idx   = Math.min(totalFrames - 1, Math.floor(ratio * totalFrames))
+        const ratio     = self.progress
+        const playRatio = holdLastRatio > 0
+          ? Math.min(1, ratio / (1 - holdLastRatio))
+          : ratio
+        const idx = Math.min(totalFrames - 1, Math.floor(playRatio * totalFrames))
         if (idx !== current) { current = idx; draw(frames[idx]) }
       },
     })
