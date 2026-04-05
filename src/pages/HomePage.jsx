@@ -266,7 +266,7 @@ export default function HomePage() {
         </GlassBox>
       </StaticSlide>
 
-      <StaticSlide zIndex={16} height="280vh">
+      <StaticSlide id="static-public" zIndex={16} height="280vh">
         <GlassBox style={{ maxWidth: '620px', padding: '2.8rem 3.2rem' }}>
           <p style={T.label}>Prostor ostaje javan</p>
           <h2 style={{ ...T.h2, marginBottom: '1.8rem' }}>
@@ -287,7 +287,7 @@ export default function HomePage() {
         </GlassBox>
       </StaticSlide>
 
-      <StaticSlide zIndex={16} height="280vh">
+      <StaticSlide id="static-change" zIndex={16} height="280vh">
         <GlassBox style={{ maxWidth: '600px', padding: '2.8rem 3.2rem' }}>
           <p style={T.label}>Što se mijenja</p>
           <h2 style={{ ...T.h2, marginBottom: '1.8rem' }}>
