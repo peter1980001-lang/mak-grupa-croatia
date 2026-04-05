@@ -10,7 +10,7 @@ import lenisRef from '../lib/lenisRef'
 // sel:  data-section selector of the slide's scroll container div
 // dur:  seconds to scroll through this slide during autoplay
 const PLAN = [
-  { sel: null,                                      dur: 6  },  // Hero (AquaCity title + Predstavlja)
+  { sel: null,                                      dur: 14 },  // Hero (7s title + 7s Predstavlja)
   { sel: '[data-section="aquacity-intro"]',          dur: 8  },  // Od postojećeg prostora cinematic
   { sel: '[data-section="static-identity"]',         dur: 5  },  // Mjesto koje generacije već poznaju
   { sel: '[data-section="aquacity-problem"]',        dur: 8  },  // Jezero postoji cinematic
