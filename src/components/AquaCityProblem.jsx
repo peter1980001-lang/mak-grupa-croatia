@@ -39,7 +39,7 @@ export default function AquaCityProblem() {
 
   return (
     <div data-section="aquacity-problem">
-      <CanvasSection name="aquacity-problem" totalFrames={144} height="230vh" zIndex={4} focusX={0.3}>
+      <CanvasSection name="aquacity-problem" totalFrames={141} height="230vh" zIndex={4} focusX={0.3} holdLastRatio={0.021}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05) 100%)',

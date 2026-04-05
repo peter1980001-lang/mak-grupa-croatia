@@ -75,7 +75,7 @@ export default function CanvasSection({
       },
     })
 
-    // Fade in 0→3%, fade out 96→100% — essential to prevent canvas sections bleeding into each other
+    // Fade in instantly at start — higher z-index sections overlay lower ones, no fade-out needed
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -86,8 +86,6 @@ export default function CanvasSection({
     })
     tl.fromTo(wrapperRef.current,
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.001 }, 0)
-    tl.to(wrapperRef.current,
-      { opacity: 0, ease: 'none', duration: 0.005 }, 0.995)
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())

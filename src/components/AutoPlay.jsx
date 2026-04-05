@@ -1,44 +1,43 @@
 // src/components/AutoPlay.jsx
 // Waypoint-based presentation autoplay.
 //
-// type:'video'  → scrolls to animTarget in animDur seconds, then holds for
-//                 HOLD_MS before moving on.
-//                 stopFraction (0–1): fraction of section height to stop at
-//                   (use to hold on frame 189 instead of last frame)
-//                 holdRatio: used for phase1 to match CanvasSection holdLastRatio
+// type:'video'  → scrolls to (bounds.start + sectionHeight*(1-holdRatio)) in animDur
+//                 seconds, then holds for holdMs (or HOLD_MS) before moving on.
+//                 holdRatio must match the holdLastRatio prop on CanvasSection so the
+//                 frame is frozen at the hold position and stays frozen during the
+//                 transition scroll to the next section.
 // type:'static' → scrolls through the slide in dur seconds, then moves on.
 //
 // Tune PLAN and HOLD_MS to adjust timing for every slide.
 import { useEffect, useRef, useState, useCallback } from 'react'
 import lenisRef from '../lib/lenisRef'
 
-const HOLD_MS   = 7000  // ms to hold on stopped frame after animation completes
+const HOLD_MS   = 7000  // ms to hold after animation completes (default)
 const PAUSE_MS  = 2000  // ms before auto-resuming after manual scroll
 
-// Frame 189 stop fraction: hold on last clean frame before fade-out transition
-// 192 frames total @ 24fps; idx 188 (0-based) = frame_0189.webp
-// CanvasSection uses: idx = Math.floor(ratio * totalFrames), so ratio = 188/192
-const F189 = 188 / 192  // ≈ 0.979
+// holdRatio for all standard video slides — must match holdLastRatio={0.021} on CanvasSection
+// This freezes the canvas on the last clean frame from 97.9% of scroll onwards
+const HR = 0.021
 
 // ─── per-slide timing ─────────────────────────────────────────────────────────
 const PLAN = [
   // Hero — two screens: quick scroll-in, then hold
-  { sel: null, type: 'video', animDur: 1.0, stopFraction: 0.10, holdMs: 8000 },  // Screen 1: 1s in + 8s hold
-  { sel: null, type: 'video', animDur: 1.0, stopFraction: 0.76, holdMs: 7000 },  // Screen 2: 1s in + 7s hold
+  { sel: null, type: 'video', animDur: 1.0, holdRatio: 0.90, holdMs: 8000 },  // Screen 1: stop at 10%, hold 8s
+  { sel: null, type: 'video', animDur: 1.0, holdRatio: 0.24, holdMs: 7000 },  // Screen 2: stop at 76%, hold 7s
 
-  { sel: '[data-section="aquacity-intro"]',           type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-intro"]',           type: 'video',  animDur: 8,  holdRatio: HR   },
   { sel: '[data-section="static-identity"]',          type: 'static', dur: 15      },
-  { sel: '[data-section="aquacity-problem"]',         type: 'video',  animDur: 8,  stopFraction: F189 },
-  { sel: '[data-section="aquacity-location"]',        type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-problem"]',         type: 'video',  animDur: 8,  holdRatio: HR   },
+  { sel: '[data-section="aquacity-location"]',        type: 'video',  animDur: 8,  holdRatio: HR   },
   { sel: '[data-section="static-varazdin-transit"]',  type: 'static', dur: 15      },
-  { sel: '[data-section="aquacity-vision"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-vision"]',          type: 'video',  animDur: 8,  holdRatio: HR   },
   { sel: '[data-section="static-model"]',             type: 'static', dur: 25      },  // Kontroliran. Siguran.
   { sel: '[data-section="static-phases"]',            type: 'static', dur: 15      },
-  { sel: '[data-section="aquacity-phase1"]',          type: 'video',  animDur: 12, holdRatio: 0.14 },  // 19s total (12+7)
-  { sel: '[data-section="aquacity-phase2"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
-  { sel: '[data-section="aquacity-phase3"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
-  { sel: '[data-section="aquacity-phase4"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
-  { sel: '[data-section="aquacity-phase5"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-phase1"]',          type: 'video',  animDur: 12, holdRatio: 0.14 },  // 19s total
+  { sel: '[data-section="aquacity-phase2"]',          type: 'video',  animDur: 8,  holdRatio: HR   },
+  { sel: '[data-section="aquacity-phase3"]',          type: 'video',  animDur: 8,  holdRatio: HR   },
+  { sel: '[data-section="aquacity-phase4"]',          type: 'video',  animDur: 8,  holdRatio: HR   },
+  { sel: '[data-section="aquacity-phase5"]',          type: 'video',  animDur: 8,  holdRatio: HR   },
   { sel: '[data-section="static-full-vision"]',       type: 'static', dur: 15      },
   { sel: '[data-section="static-partnership"]',       type: 'static', dur: 15      },
   { sel: '[data-section="static-public"]',            type: 'static', dur: 15      },
@@ -166,7 +165,10 @@ export default function AutoPlay() {
     setDone(false)
     window.dispatchEvent(new CustomEvent('autoplay:resume'))
     const pos = l.scroll ?? window.scrollY
-    runStep(getCurrentStepIndex(pos))
+    // If at (or near) the top, always start from step 0 — getCurrentStepIndex would
+    // skip hero screen 1 because both hero entries share the same sel:null bounds.
+    const idx = pos < 20 ? 0 : getCurrentStepIndex(pos)
+    runStep(idx)
   }, [runStep])
 
   const pause = useCallback(() => {

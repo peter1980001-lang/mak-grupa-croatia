@@ -43,7 +43,7 @@ export default function AquaCityIntro() {
 
   return (
     <div data-section="aquacity-intro">
-      <CanvasSection name="aquacity-intro" totalFrames={192} height="160vh" zIndex={2} focusX={0.35}>
+      <CanvasSection name="aquacity-intro" totalFrames={189} height="160vh" zIndex={2} focusX={0.35} holdLastRatio={0.021}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.25) 100%)',

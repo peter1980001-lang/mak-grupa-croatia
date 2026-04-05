@@ -39,7 +39,7 @@ export default function AquaCityVision() {
 
   return (
     <div data-section="aquacity-vision">
-      <CanvasSection name="aquacity-vision2" totalFrames={192} height="320vh" zIndex={7} focusX={0.45}>
+      <CanvasSection name="aquacity-vision2" totalFrames={189} height="320vh" zIndex={7} focusX={0.45} holdLastRatio={0.021}>
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%)',
