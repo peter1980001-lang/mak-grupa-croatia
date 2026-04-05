@@ -1,43 +1,50 @@
 // src/components/AutoPlay.jsx
 // Waypoint-based presentation autoplay.
 //
-// type:'video'  → scrolls through animation in animDur seconds, then holds
-//                 the last frame for HOLD_MS before moving on.
+// type:'video'  → scrolls to animTarget in animDur seconds, then holds for
+//                 HOLD_MS before moving on.
+//                 stopFraction (0–1): fraction of section height to stop at
+//                   (use to hold on frame 189 instead of last frame)
+//                 holdRatio: used for phase1 to match CanvasSection holdLastRatio
 // type:'static' → scrolls through the slide in dur seconds, then moves on.
 //
 // Tune PLAN and HOLD_MS to adjust timing for every slide.
 import { useEffect, useRef, useState, useCallback } from 'react'
 import lenisRef from '../lib/lenisRef'
 
-const HOLD_MS   = 7000  // ms to hold finished frame / static slide
+const HOLD_MS   = 7000  // ms to hold on stopped frame after animation completes
 const PAUSE_MS  = 2000  // ms before auto-resuming after manual scroll
 
+// Frame 189 stop fraction: hold on last clean frame before fade-out transition
+// 192 frames total @ 24fps; idx 188 (0-based) = frame_0189.webp
+// CanvasSection uses: idx = Math.floor(ratio * totalFrames), so ratio = 188/192
+const F189 = 188 / 192  // ≈ 0.979
+
 // ─── per-slide timing ─────────────────────────────────────────────────────────
-// video:  animDur = seconds to play through the frames
-//         holdRatio = fraction of section height where last frame is held
-//                     (must match the holdLastRatio prop on CanvasSection)
-// static: dur = seconds to display the slide
 const PLAN = [
-  { sel: null,                                       type: 'static', dur: 14      },  // Hero (7s title + 7s Predstavlja)
-  { sel: '[data-section="aquacity-intro"]',           type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="static-identity"]',          type: 'static', dur: 7       },
-  { sel: '[data-section="aquacity-problem"]',         type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="aquacity-location"]',        type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="static-varazdin-transit"]',  type: 'static', dur: 7       },
-  { sel: '[data-section="aquacity-vision"]',          type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="static-model"]',             type: 'static', dur: 7       },
-  { sel: '[data-section="static-phases"]',            type: 'static', dur: 7       },
-  { sel: '[data-section="aquacity-phase1"]',          type: 'video',  animDur: 15, holdRatio: 0.14 },  // 7s card1 + 8s card2
-  { sel: '[data-section="aquacity-phase2"]',          type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="aquacity-phase3"]',          type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="aquacity-phase4"]',          type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="aquacity-phase5"]',          type: 'video',  animDur: 8,  holdRatio: 0    },
-  { sel: '[data-section="static-full-vision"]',       type: 'static', dur: 7       },
-  { sel: '[data-section="static-partnership"]',       type: 'static', dur: 7       },
-  { sel: '[data-section="static-public"]',            type: 'static', dur: 7       },
-  { sel: '[data-section="static-change"]',            type: 'static', dur: 7       },
-  { sel: '[data-section="static-nextstep"]',          type: 'static', dur: 7       },
-  { sel: '[data-section="static-contact"]',           type: 'static', dur: 7       },
+  // Hero — two screens, each held for 7s after a quick scroll-in
+  { sel: null, type: 'video', animDur: 0.8, stopFraction: 0.10 },   // Screen 1: AquaCity title
+  { sel: null, type: 'video', animDur: 1.2, stopFraction: 0.76 },   // Screen 2: MAK Predstavlja
+
+  { sel: '[data-section="aquacity-intro"]',           type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="static-identity"]',          type: 'static', dur: 15      },
+  { sel: '[data-section="aquacity-problem"]',         type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-location"]',        type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="static-varazdin-transit"]',  type: 'static', dur: 15      },
+  { sel: '[data-section="aquacity-vision"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="static-model"]',             type: 'static', dur: 25      },  // Kontroliran. Siguran.
+  { sel: '[data-section="static-phases"]',            type: 'static', dur: 15      },
+  { sel: '[data-section="aquacity-phase1"]',          type: 'video',  animDur: 12, holdRatio: 0.14 },  // 19s total (12+7)
+  { sel: '[data-section="aquacity-phase2"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-phase3"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-phase4"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="aquacity-phase5"]',          type: 'video',  animDur: 8,  stopFraction: F189 },
+  { sel: '[data-section="static-full-vision"]',       type: 'static', dur: 15      },
+  { sel: '[data-section="static-partnership"]',       type: 'static', dur: 15      },
+  { sel: '[data-section="static-public"]',            type: 'static', dur: 15      },
+  { sel: '[data-section="static-change"]',            type: 'static', dur: 15      },
+  { sel: '[data-section="static-nextstep"]',          type: 'static', dur: 15      },
+  { sel: '[data-section="static-contact"]',           type: 'static', dur: 15      },
 ]
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -99,15 +106,13 @@ export default function AutoPlay() {
     const currentPos = l.scroll ?? window.scrollY
 
     if (step.type === 'video') {
-      // Scroll through animation portion at animDur speed
-      const animEnd = Math.min(
-        bounds.start + bounds.end - bounds.start - (bounds.end - bounds.start) * step.holdRatio,
-        bounds.end,
-        maxScroll
-      )
-      // Simpler: animEnd = bounds.end - sectionHeight * holdRatio
       const sectionHeight = bounds.end - bounds.start
-      const animTarget = Math.min(bounds.start + sectionHeight * (1 - step.holdRatio), maxScroll)
+      // stopFraction: stop at a specific fraction of the section (e.g. frame 189)
+      // holdRatio: legacy — used only for phase1 to match CanvasSection holdLastRatio
+      const fraction = step.stopFraction != null
+        ? step.stopFraction
+        : 1 - (step.holdRatio || 0)
+      const animTarget = Math.min(bounds.start + sectionHeight * fraction, maxScroll)
 
       if (animTarget <= currentPos + 2) {
         // Already past animation — just hold then advance

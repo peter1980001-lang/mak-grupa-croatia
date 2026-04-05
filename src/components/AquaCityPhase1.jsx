@@ -26,11 +26,11 @@ export default function AquaCityPhase1() {
     tl.fromTo(cardRef.current,
       { opacity: 0, x: -18 }, { opacity: 1, x: 0, ease: 'none', duration: 0.10 }, 0.04)
     tl.to(cardRef.current,
-      { opacity: 0, x: -30, ease: 'none', duration: 0.08 }, 0.40)
+      { opacity: 0, x: -30, ease: 'none', duration: 0.08 }, 0.50)
 
     // Card 2 (Vremenski okvir) — top-right, second half
     tl.fromTo(card2Ref.current,
-      { opacity: 0, x: 18 }, { opacity: 1, x: 0, ease: 'none', duration: 0.10 }, 0.42)
+      { opacity: 0, x: 18 }, { opacity: 1, x: 0, ease: 'none', duration: 0.10 }, 0.52)
     tl.to(card2Ref.current,
       { opacity: 0, y: -30, ease: 'none', duration: 0.08 }, 0.92)
 
