@@ -5,22 +5,36 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CanvasSection from './CanvasSection'
 import GlassBox from './GlassBox'
 
+const CARD_HOLD_MS  = 12500
+const CARD_FADE_OUT = 0.5
+
 export default function AquaCityProblem() {
-  const cardRef = useRef(null)
+  const cardRef      = useRef(null)
+  const cardTimerRef = useRef(null)
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '[data-section="aquacity-problem"]',
-        start: 'top top', end: 'bottom top', scrub: true,
+    ScrollTrigger.create({
+      trigger: '[data-section="aquacity-problem"]',
+      start: '20% top',
+      onEnter: () => {
+        if (cardTimerRef.current) clearTimeout(cardTimerRef.current)
+        gsap.fromTo(cardRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+        cardTimerRef.current = setTimeout(() => {
+          gsap.to(cardRef.current, { opacity: 0, x: -60, duration: CARD_FADE_OUT, ease: 'power2.in' })
+        }, CARD_HOLD_MS)
+      },
+      onLeaveBack: () => {
+        if (cardTimerRef.current) { clearTimeout(cardTimerRef.current); cardTimerRef.current = null }
+        gsap.set(cardRef.current, { opacity: 0, y: 18, x: 0 })
       },
     })
-    tl.fromTo(cardRef.current,
-      { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.03)
-    tl.to(cardRef.current,
-      { opacity: 0, x: -60, ease: 'none', duration: 0.08 }, 0.92)
-    tl.to({}, { duration: 0 }, 1)
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      if (cardTimerRef.current) clearTimeout(cardTimerRef.current)
+    }
   }, [])
 
   return (

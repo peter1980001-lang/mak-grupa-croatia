@@ -22,9 +22,9 @@ const F189 = 188 / 192  // ≈ 0.979
 
 // ─── per-slide timing ─────────────────────────────────────────────────────────
 const PLAN = [
-  // Hero — two screens, each held for 7s after a quick scroll-in
-  { sel: null, type: 'video', animDur: 0.8, stopFraction: 0.10 },   // Screen 1: AquaCity title
-  { sel: null, type: 'video', animDur: 1.2, stopFraction: 0.76 },   // Screen 2: MAK Predstavlja
+  // Hero — two screens: quick scroll-in, then hold
+  { sel: null, type: 'video', animDur: 1.0, stopFraction: 0.10, holdMs: 8000 },  // Screen 1: 1s in + 8s hold
+  { sel: null, type: 'video', animDur: 1.0, stopFraction: 0.76, holdMs: 7000 },  // Screen 2: 1s in + 7s hold
 
   { sel: '[data-section="aquacity-intro"]',           type: 'video',  animDur: 8,  stopFraction: F189 },
   { sel: '[data-section="static-identity"]',          type: 'static', dur: 15      },
@@ -114,12 +114,14 @@ export default function AutoPlay() {
         : 1 - (step.holdRatio || 0)
       const animTarget = Math.min(bounds.start + sectionHeight * fraction, maxScroll)
 
+      const holdDur = step.holdMs ?? HOLD_MS
+
       if (animTarget <= currentPos + 2) {
         // Already past animation — just hold then advance
         holdTimer.current = setTimeout(() => {
           if (!activeRef.current) return
           runStep(idx + 1)
-        }, HOLD_MS)
+        }, holdDur)
         return
       }
 
@@ -128,11 +130,10 @@ export default function AutoPlay() {
         easing: (t) => t,
         onComplete: () => {
           if (!activeRef.current) return
-          // Hold on last frame for HOLD_MS, then advance
           holdTimer.current = setTimeout(() => {
             if (!activeRef.current) return
             runStep(idx + 1)
-          }, HOLD_MS)
+          }, holdDur)
         },
       })
 

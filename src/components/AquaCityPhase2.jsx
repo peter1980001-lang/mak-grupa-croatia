@@ -5,11 +5,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CanvasSection from './CanvasSection'
 import GlassBox from './GlassBox'
 
+const CARD_HOLD_MS  = 12500
+const CARD_FADE_OUT = 0.5
+
 export default function AquaCityPhase2() {
-  const phaseRef = useRef(null)
-  const cardRef  = useRef(null)
+  const phaseRef     = useRef(null)
+  const cardRef      = useRef(null)
+  const cardTimerRef = useRef(null)
 
   useEffect(() => {
+    // Phase label — scroll-driven fade-in only
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '[data-section="aquacity-phase2"]',
@@ -18,12 +23,31 @@ export default function AquaCityPhase2() {
     })
     tl.fromTo(phaseRef.current,
       { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.06 }, 0.02)
-    tl.fromTo(cardRef.current,
-      { opacity: 0, y: -18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.04)
-    tl.to(cardRef.current,
-      { opacity: 0, y: -35, x: 25, ease: 'none', duration: 0.08 }, 0.92)
     tl.to({}, { duration: 0 }, 1)
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
+
+    // Glass box — time-based
+    ScrollTrigger.create({
+      trigger: '[data-section="aquacity-phase2"]',
+      start: '20% top',
+      onEnter: () => {
+        if (cardTimerRef.current) clearTimeout(cardTimerRef.current)
+        gsap.fromTo(cardRef.current,
+          { opacity: 0, y: -18 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+        cardTimerRef.current = setTimeout(() => {
+          gsap.to(cardRef.current, { opacity: 0, y: -35, x: 25, duration: CARD_FADE_OUT, ease: 'power2.in' })
+        }, CARD_HOLD_MS)
+      },
+      onLeaveBack: () => {
+        if (cardTimerRef.current) { clearTimeout(cardTimerRef.current); cardTimerRef.current = null }
+        gsap.set(cardRef.current, { opacity: 0, y: -18, x: 0 })
+      },
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      if (cardTimerRef.current) clearTimeout(cardTimerRef.current)
+    }
   }, [])
 
   return (

@@ -5,22 +5,40 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CanvasSection from './CanvasSection'
 import GlassBox from './GlassBox'
 
+// Glass box timing constants (ms)
+// onEnter fires at 20% scroll ≈ 1.6s after section start (animDur 8s)
+// fade-in: 0.4s, hold: 12.5s, fade-out: 0.5s → gone at ~15s from section start
+const CARD_HOLD_MS  = 12500
+const CARD_FADE_OUT = 0.5
+
 export default function AquaCityIntro() {
-  const cardRef = useRef(null)
+  const cardRef      = useRef(null)
+  const cardTimerRef = useRef(null)
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '[data-section="aquacity-intro"]',
-        start: 'top top', end: 'bottom top', scrub: true,
+    // Glass box — time-based (decoupled from scroll scrub)
+    ScrollTrigger.create({
+      trigger: '[data-section="aquacity-intro"]',
+      start: '20% top',
+      onEnter: () => {
+        if (cardTimerRef.current) clearTimeout(cardTimerRef.current)
+        gsap.fromTo(cardRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+        cardTimerRef.current = setTimeout(() => {
+          gsap.to(cardRef.current, { opacity: 0, y: 40, scale: 0.95, duration: CARD_FADE_OUT, ease: 'power2.in' })
+        }, CARD_HOLD_MS)
+      },
+      onLeaveBack: () => {
+        if (cardTimerRef.current) { clearTimeout(cardTimerRef.current); cardTimerRef.current = null }
+        gsap.set(cardRef.current, { opacity: 0, y: 18, scale: 1 })
       },
     })
-    tl.fromTo(cardRef.current,
-      { opacity: 0, y: 18 }, { opacity: 1, y: 0, ease: 'none', duration: 0.10 }, 0.03)
-    tl.to(cardRef.current,
-      { opacity: 0, y: 40, scale: 0.95, ease: 'none', duration: 0.08 }, 0.92)
-    tl.to({}, { duration: 0 }, 1) // anchor timeline to full scroll range
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      if (cardTimerRef.current) clearTimeout(cardTimerRef.current)
+    }
   }, [])
 
   return (
