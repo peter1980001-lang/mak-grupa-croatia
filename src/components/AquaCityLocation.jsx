@@ -49,7 +49,7 @@ export default function AquaCityLocation() {
           background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 35%)',
         }} />
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '520px', opacity: 0 }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -63,8 +63,13 @@ export default function AquaCityLocation() {
               Rijetka prednost<br />
               <span style={{ fontWeight: 600 }}>za Varaždin</span>
             </h2>
+            <p style={{
+              color: '#c8a96a', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)',
+              fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 500,
+              letterSpacing: '0.02em', marginBottom: '1.2rem',
+            }}><span style={{ color: '#3d8fa3' }}>1.500.000+</span> potencijalnih posjetitelja u krugu 90 minuta</p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['Prirodno jezero uz grad', 'Regionalni doseg: Zagreb · Slovenija · Austrija', 'Promet i vidljivost već postoje'].map((item) => (
+              {['Prirodno jezero uz grad', 'Zagreb 85 km · Maribor 74 km · Graz 140 km', 'Promet i vidljivost već postoje'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',

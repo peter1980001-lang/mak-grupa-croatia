@@ -66,7 +66,7 @@ export default function LoadingScreen() {
           textTransform:  'uppercase',
           margin:         '0 0 1.4rem 0',
         }}>
-          Učitavamo vaše iskustvo
+          AquaCity Varaždin
         </p>
 
         {/* Track */}
@@ -84,7 +84,7 @@ export default function LoadingScreen() {
             top:        0,
             height:     '100%',
             width:      `${progress}%`,
-            background: '#c9a84c',
+            background: '#3d8fa3',
             transition: 'width 0.25s ease',
           }} />
         </div>

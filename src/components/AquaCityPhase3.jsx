@@ -67,12 +67,12 @@ export default function AquaCityPhase3() {
             color: '#c8a96a', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
             fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.35em', textTransform: 'uppercase',
-            borderLeft: '3px solid #c8a96a', paddingLeft: '1rem', textShadow: '0 0 18px rgba(200,169,106,0.5)',
+            borderLeft: '3px solid #3d8fa3', paddingLeft: '1rem', textShadow: '0 0 18px rgba(61,143,163,0.4)',
           }}>Faza 3 — Vodeni park</span>
         </div>
 
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '12%', right: '8%', width: 'min(84%, 500px)', textAlign: 'right', opacity: 0 }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -86,7 +86,7 @@ export default function AquaCityPhase3() {
               Aquapark na jezeru —<br /><span style={{ fontWeight: 600 }}>za sve uzraste</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['20+ vodenih atrakcija', 'Napuhavajuće platforme i tobogani', 'Aktivnost za djecu i odrasle', 'Razlog za ponovni dolazak'].map((item) => (
+              {['20+ vodenih atrakcija', 'Napuhavajuće platforme i tobogani', 'Aktivnost za djecu i odrasle', 'Djeca ne žele kući'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',

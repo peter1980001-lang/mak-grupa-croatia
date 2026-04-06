@@ -63,13 +63,13 @@ export default function AquaCityPhase1() {
             color: '#c8a96a', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
             fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.35em', textTransform: 'uppercase',
-            borderLeft: '3px solid #c8a96a', paddingLeft: '1rem', textShadow: '0 0 18px rgba(200,169,106,0.5)',
+            borderLeft: '3px solid #3d8fa3', paddingLeft: '1rem', textShadow: '0 0 18px rgba(61,143,163,0.4)',
           }}>Faza 1 — Aktivacija jezera</span>
         </div>
 
         {/* Card 1: Jezero postaje — top-left, first half */}
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '12%', left: '8%', width: 'min(84%, 520px)', opacity: 0 }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -83,7 +83,7 @@ export default function AquaCityPhase1() {
               Jezero postaje<br /><span style={{ fontWeight: 600 }}>prostor boravka</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['Električni PLJUS brodići', 'Plutajuće platforme', 'Boravak na vodi', 'Novo iskustvo za posjetitelje i građane'].map((item) => (
+              {['Električni PLJUS brodići', 'Plutajuće platforme', 'Boravak na vodi', 'Za varaždince i goste jednako'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
@@ -98,7 +98,7 @@ export default function AquaCityPhase1() {
 
         {/* Card 2: Vremenski okvir — top-right, second half */}
         <div ref={card2Ref} className="slide-card" style={{ position: 'absolute', top: '12%', right: '8%', width: 'min(84%, 500px)', opacity: 0 }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -109,13 +109,13 @@ export default function AquaCityPhase1() {
               fontWeight: 300,
               lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 1.5rem 0',
             }}>
-              Brza i kontrolirana<br /><span style={{ fontWeight: 600 }}>implementacija</span>
+              Početak unutar<br /><span style={{ fontWeight: 600 }}>60 dana od dozvola</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.4rem 0' }}>
               {[
-                'Faza 1: unutar 2 mjeseca od odobrenja i dozvola',
-                'Daljnje faze razvijaju se postupno, uz potrebna odobrenja',
-                'Svaki korak temeljen na stvarnim rezultatima',
+                'Faza 1: unutar 60 dana od dobivenih dozvola',
+                'Svaka iduća faza ovisi o rezultatima prethodne',
+                'Uz koordinaciju s Gradom na svakom koraku',
               ].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
@@ -131,7 +131,7 @@ export default function AquaCityPhase1() {
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300,
               borderTop: '1px solid rgba(200,169,106,0.25)', paddingTop: '1rem', margin: 0, fontStyle: 'italic',
             }}>
-              Projekt se razvija u skladu s propisima i u suradnji s nadležnim tijelima
+              U skladu s lokalnim propisima i uz koordinaciju s Gradom.
             </p>
           </GlassBox>
         </div>

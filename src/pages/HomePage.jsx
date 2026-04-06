@@ -16,6 +16,7 @@ import logoSrc           from '../assets/logo_free.png'
 import AudioManager      from '../components/AudioManager'
 import AutoPlay         from '../components/AutoPlay'
 import LoadingScreen    from '../components/LoadingScreen'
+import ProgressDots     from '../components/ProgressDots'
 
 // ─── shared typography tokens ─────────────────────────────────────────────────
 const T = {
@@ -61,6 +62,7 @@ export default function HomePage() {
       <LoadingScreen />
       <AudioManager />
       <AutoPlay />
+      <ProgressDots />
 
       {/* ══════════════════════════════════════════════════════════════════════
           SLIDE 1–2  |  Hero + Intro cinematic  |  z 0–2
@@ -79,7 +81,7 @@ export default function HomePage() {
             <span style={T.gold}>već poznaju</span>
           </h2>
           <ul style={{ padding: 0, margin: '0 0 1.6rem 0' }}>
-            {['Okupljanje s obitelji i prijateljima', 'Prostor za odmor i druženje', 'Aktivno — ali sezonski'].map(t => <Bullet key={t}>{t}</Bullet>)}
+            {['Okupljanje s obitelji i prijateljima', 'Prostor za odmor i druženje', 'Aktivno, ali samo ljeti'].map(t => <Bullet key={t}>{t}</Bullet>)}
           </ul>
           <div style={T.divider} />
           <p style={{ ...T.body, fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: 'rgba(245,243,234,0.80)', margin: 0 }}>
@@ -103,23 +105,29 @@ export default function HomePage() {
           SLIDE 7–8  |  Strateška pozicija  |  z 6
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-varazdin-transit" zIndex={6} height="290vh">
-        <GlassBox style={{ maxWidth: '560px', padding: '2.8rem 3.2rem', position: 'absolute', bottom: '8%', left: '8%' }}>
-          <p style={T.label}>Strateška pozicija</p>
+        <GlassBox style={{ maxWidth: '620px', padding: '2.8rem 3.2rem', position: 'absolute', bottom: '8%', left: '8%' }}>
+          <p style={T.label}>Europski primjeri</p>
           <h2 style={{ ...T.h2, marginBottom: '1.8rem' }}>
-            Varaždin kao točka prolaza —<br />
-            <span style={T.gold}>i potencijal dolaska</span>
+            Primjeri iz Europe<br />
+            <span style={T.gold}>koji govore jasno</span>
           </h2>
-          <ul style={{ padding: 0, margin: '0 0 1.6rem 0' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', marginBottom: '1.6rem' }}>
             {[
-              'Između Zagreba i sjevera Hrvatske',
-              'Povezan sa Slovenijom, Austrijom i Mađarskom',
-              'Regionalni tokovi već postoje',
-            ].map(t => <Bullet key={t}>{t}</Bullet>)}
-          </ul>
+              { loc: 'Bled · Slovenija', stat: '2.000.000 posjetitelja godišnje · prihod €200M', note: 'UN Best Tourism Village 2025' },
+              { loc: 'Bregenz · Austrija', stat: '200.000 posjetitelja festivala na jezeru', note: 'Seebühne na Bodenskom jezeru od 1946.' },
+              { loc: 'Varaždin · danas', stat: '115.400 turista · prosj. boravak 2,2 noći', note: 'Potencijal daleko ispod mogućeg' },
+            ].map(({ loc, stat, note }) => (
+              <div key={loc} style={{ borderLeft: '2px solid rgba(200,169,106,0.35)', paddingLeft: '1rem' }}>
+                <p style={{ color: '#c8a96a', fontSize: 'clamp(0.65rem, 0.9vw, 0.78rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', margin: '0 0 0.2rem 0' }}>{loc}</p>
+                <p style={{ color: '#f5f3ea', fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400, margin: '0 0 0.15rem 0' }}>{stat}</p>
+                <p style={{ color: 'rgba(245,243,234,0.45)', fontSize: 'clamp(0.7rem, 0.95vw, 0.8rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, margin: 0, fontStyle: 'italic' }}>{note}</p>
+              </div>
+            ))}
+          </div>
           <div style={T.divider} />
           <p style={{ ...T.body, color: 'rgba(245,243,234,0.85)', fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)', margin: 0 }}>
-            Prolaz postoji.{' '}
-            <span style={{ color: '#c8a96a', fontWeight: 400 }}>Boravak je kratak.</span>
+            Infrastruktura je tu.{' '}
+            <span style={{ color: '#c8a96a', fontWeight: 400 }}>Nedostaje jedino sadržaj.</span>
           </p>
         </GlassBox>
       </StaticSlide>
@@ -139,7 +147,7 @@ export default function HomePage() {
             Kontroliran. Siguran.<br />
             <span style={T.gold}>Bez rizika za Grad.</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.6rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.6rem', marginBottom: '1.8rem' }}>
             <div style={{ background: 'rgba(200,169,106,0.06)', borderRadius: '12px', padding: '1.4rem 1.2rem' }}>
               <p style={{ ...T.h3, color: '#c8a96a', marginBottom: '0.7rem' }}>Zaštita</p>
               <ul style={{ padding: 0, margin: 0 }}>
@@ -147,17 +155,23 @@ export default function HomePage() {
               </ul>
             </div>
             <div style={{ background: 'rgba(200,169,106,0.06)', borderRadius: '12px', padding: '1.4rem 1.2rem' }}>
-              <p style={{ ...T.h3, color: '#c8a96a', marginBottom: '0.7rem' }}>Bez ulaganja</p>
+              <p style={{ ...T.h3, color: '#c8a96a', marginBottom: '0.7rem' }}>Bez troška za Grad</p>
               <ul style={{ padding: 0, margin: 0 }}>
-                {['100% privatno financirano', 'Grad bez troška', 'Grad zadržava kontrolu'].map(t => <Bullet key={t}>{t}</Bullet>)}
+                {['100% privatno financirano', 'Grad bez ikakvog troška', 'Grad zadržava kontrolu'].map(t => <Bullet key={t}>{t}</Bullet>)}
               </ul>
             </div>
             <div style={{ background: 'rgba(200,169,106,0.06)', borderRadius: '12px', padding: '1.4rem 1.2rem' }}>
               <p style={{ ...T.h3, color: '#c8a96a', marginBottom: '0.7rem' }}>Fazni pristup</p>
               <ul style={{ padding: 0, margin: 0 }}>
-                {['Korak po korak', 'Svaka faza se potvrđuje', 'Razvoj bez obveze'].map(t => <Bullet key={t}>{t}</Bullet>)}
+                {['Faza po faza', 'Svaka faza posebno odobrena', 'Bez dugoročnih obveza'].map(t => <Bullet key={t}>{t}</Bullet>)}
               </ul>
             </div>
+          </div>
+          <div style={{ background: 'rgba(200,169,106,0.08)', borderRadius: '12px', padding: '1.2rem 1.6rem', borderLeft: '3px solid #c8a96a' }}>
+            <p style={{ color: 'rgba(245,243,234,0.55)', fontSize: 'clamp(0.6rem, 0.85vw, 0.72rem)', fontFamily: '"DM Sans", system-ui, sans-serif', letterSpacing: '0.25em', textTransform: 'uppercase', margin: '0 0 0.3rem 0' }}>Tržišni podatak · Europsko tržište</p>
+            <p style={{ color: '#f5f3ea', fontSize: 'clamp(0.9rem, 1.3vw, 1rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400, margin: 0 }}>
+              Jedan električni brod: <span style={{ color: '#c8a96a', fontWeight: 500 }}>€30.000 – €36.000 prihoda u 90-dnevnoj sezoni</span>
+            </p>
           </div>
         </GlassBox>
       </StaticSlide>
@@ -246,8 +260,8 @@ export default function HomePage() {
         <GlassBox style={{ maxWidth: '680px', padding: '3rem 3.5rem' }}>
           <p style={T.label}>Model suradnje</p>
           <h2 style={{ ...T.h2, marginBottom: '2rem' }}>
-            Jasno definirane<br />
-            <span style={T.gold}>odgovornosti</span>
+            Grad Varaždin<br />
+            <span style={T.gold}>i M.A.K Grupa</span>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
             <div>
@@ -282,7 +296,7 @@ export default function HomePage() {
           </ul>
           <div style={T.divider} />
           <p style={{ ...T.body, color: '#c8a96a', fontWeight: 400, fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', margin: 0 }}>
-            Sadržaj se dodaje — prostor ostaje javni
+            Sadržaj se dodaje. Prostor ostaje javan.
           </p>
         </GlassBox>
       </StaticSlide>
@@ -295,7 +309,7 @@ export default function HomePage() {
             <span style={T.gold}>Veća vrijednost.</span>
           </h2>
           <ul style={{ padding: 0, margin: 0 }}>
-            {['Prostor dobiva novu funkciju', 'Boravak postaje duži', 'Aktivnost nije više sezonska'].map(t => <Bullet key={t}>{t}</Bullet>)}
+            {['Jezero dobiva novu ulogu', 'Posjetitelji ostaju duže', 'Aktivno i izvan ljeta'].map(t => <Bullet key={t}>{t}</Bullet>)}
           </ul>
         </GlassBox>
       </StaticSlide>
@@ -350,7 +364,7 @@ export default function HomePage() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', marginBottom: '1.8rem' }}>
               {['Fazni razvoj.', 'Potpuna kontrola Grada.', 'Privatno financiranje.'].map(t => (
                 <div key={t} style={{ textAlign: 'center' }}>
-                  <span style={{ color: '#c8a96a', fontSize: '1rem', display: 'block', marginBottom: '0.3rem' }}>◈</span>
+                  <span style={{ color: 'rgba(200,169,106,0.5)', fontSize: '0.7rem', display: 'block', marginBottom: '0.4rem' }}>—</span>
                   <p style={{ color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, margin: 0 }}>{t}</p>
                 </div>
               ))}
@@ -359,8 +373,8 @@ export default function HomePage() {
               <p style={{ color: '#f5f3ea', fontFamily: '"DM Sans", system-ui, sans-serif', fontSize: 'clamp(1rem, 1.6vw, 1.2rem)', fontWeight: 400, margin: '0 0 0.25rem 0' }}>Mario Kukec</p>
               <p style={{ ...T.body, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)', marginBottom: '1.1rem' }}>Direktor · M.A.K Grupa d.o.o.</p>
               <p style={{ ...T.body, lineHeight: 2.2, color: 'rgba(245,243,234,0.70)' }}>
-                <span style={T.gold}>mario@makgrupa.com</span><br />
-                +971 55 129 1080 · www.makgrupa.com
+                <a href="mailto:mario@makgrupa.com" style={{ color: '#c8a96a', textDecoration: 'none' }}>mario@makgrupa.com</a><br />
+                <a href="tel:+97155129 1080" style={{ color: 'rgba(245,243,234,0.70)', textDecoration: 'none' }}>+971 55 129 1080</a> · www.makgrupa.com
               </p>
             </div>
             <p style={{ ...T.body, fontSize: 'clamp(0.55rem, 0.8vw, 0.68rem)', color: 'rgba(245,243,234,0.18)', letterSpacing: '0.1em', marginTop: '1.4rem' }}>
