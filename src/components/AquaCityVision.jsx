@@ -55,25 +55,32 @@ export default function AquaCityVision() {
               letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '1.2rem',
             }}>Vizija</p>
             <h2 style={{
-              color: '#f5f3ea', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2.2rem, 4.2vw, 3.6rem)',
+              color: '#f5f3ea', fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
               fontWeight: 300,
-              lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 2rem 0',
+              lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.6rem 0',
             }}>
               Iz mjesta dolaska<br />u <span style={{ fontWeight: 600 }}>destinaciju ostanka</span>
             </h2>
-            {/* Bold anchor stat */}
-            <div style={{ textAlign: 'center', margin: '0.4rem 0 1.6rem 0' }}>
+
+            {/* Bold anchor stat — standalone block with breathing room */}
+            <div style={{
+              textAlign: 'center',
+              borderTop: '1px solid rgba(61,143,163,0.18)',
+              borderBottom: '1px solid rgba(61,143,163,0.18)',
+              padding: '1.6rem 0',
+              margin: '0 0 1.8rem 0',
+            }}>
               <p style={{
-                color: '#3d8fa3', fontSize: 'clamp(2.8rem, 5vw, 4.5rem)',
+                color: '#3d8fa3', fontSize: 'clamp(4rem, 7vw, 6.5rem)',
                 fontFamily: '"Cormorant Garamond", Georgia, serif',
                 fontWeight: 700, lineHeight: 1, margin: 0,
               }}>3×</p>
               <p style={{
-                color: 'rgba(245,243,234,0.38)',
+                color: 'rgba(245,243,234,0.40)',
                 fontSize: 'clamp(0.58rem, 0.78vw, 0.66rem)',
                 fontFamily: '"DM Sans", system-ui, sans-serif',
-                fontWeight: 300, letterSpacing: '0.35em',
-                textTransform: 'uppercase', margin: '0.25rem 0 0 0',
+                fontWeight: 300, letterSpacing: '0.4em',
+                textTransform: 'uppercase', margin: '0.5rem 0 0 0',
               }}>duži boravak posjetitelja</p>
             </div>
 
@@ -81,14 +88,14 @@ export default function AquaCityVision() {
               {[{ n: '01', label: 'Aktivno jezero' }, { n: '02', label: 'Sadržaj kroz cijeli dan' }, { n: '03', label: 'Cjelogodišnja aktivnost' }].map((p) => (
                 <div key={p.n} style={{ textAlign: 'center' }}>
                   <p style={{
-                    color: '#3d8fa3', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+                    color: '#3d8fa3', fontSize: 'clamp(0.85rem, 1.4vw, 1.1rem)',
                     fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 600,
-                    letterSpacing: '0.05em', margin: '0 0 0.3rem 0',
+                    letterSpacing: '0.08em', margin: '0 0 0.3rem 0',
                   }}>{p.n}</p>
                   <p style={{
-                    color: 'rgba(245,243,234,0.70)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)',
+                    color: 'rgba(245,243,234,0.60)', fontSize: 'clamp(0.65rem, 0.95vw, 0.78rem)',
                     fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300,
-                    letterSpacing: '0.1em', textTransform: 'uppercase',
+                    letterSpacing: '0.12em', textTransform: 'uppercase',
                   }}>{p.label}</p>
                 </div>
               ))}
