@@ -48,7 +48,7 @@ export default function AquaCityVision() {
           position: 'absolute', top: '12%', right: '8%',
           textAlign: 'center', width: 'min(84%, 700px)', opacity: 0,
         }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2.2rem 2.8rem',  }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2.2rem 2.8rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -61,11 +61,27 @@ export default function AquaCityVision() {
             }}>
               Iz mjesta dolaska<br />u <span style={{ fontWeight: 600 }}>destinaciju ostanka</span>
             </h2>
+            {/* Bold anchor stat */}
+            <div style={{ textAlign: 'center', margin: '0.4rem 0 1.6rem 0' }}>
+              <p style={{
+                color: '#3d8fa3', fontSize: 'clamp(2.8rem, 5vw, 4.5rem)',
+                fontFamily: '"Cormorant Garamond", Georgia, serif',
+                fontWeight: 700, lineHeight: 1, margin: 0,
+              }}>3×</p>
+              <p style={{
+                color: 'rgba(245,243,234,0.38)',
+                fontSize: 'clamp(0.58rem, 0.78vw, 0.66rem)',
+                fontFamily: '"DM Sans", system-ui, sans-serif',
+                fontWeight: 300, letterSpacing: '0.35em',
+                textTransform: 'uppercase', margin: '0.25rem 0 0 0',
+              }}>duži boravak posjetitelja</p>
+            </div>
+
             <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem' }}>
               {[{ n: '01', label: 'Aktivno jezero' }, { n: '02', label: 'Sadržaj kroz cijeli dan' }, { n: '03', label: 'Cjelogodišnja aktivnost' }].map((p) => (
                 <div key={p.n} style={{ textAlign: 'center' }}>
                   <p style={{
-                    color: '#c8a96a', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+                    color: '#3d8fa3', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
                     fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 600,
                     letterSpacing: '0.05em', margin: '0 0 0.3rem 0',
                   }}>{p.n}</p>

@@ -63,12 +63,12 @@ export default function AquaCityPhase2() {
             color: '#c8a96a', fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)',
             fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
             letterSpacing: '0.35em', textTransform: 'uppercase',
-            borderLeft: '3px solid #c8a96a', paddingLeft: '1rem', textShadow: '0 0 18px rgba(200,169,106,0.5)',
+            borderLeft: '3px solid #3d8fa3', paddingLeft: '1rem', textShadow: '0 0 18px rgba(61,143,163,0.4)',
           }}>Faza 2 — Večernji sadržaji</span>
         </div>
 
         <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '12%', right: '8%', maxWidth: '540px', opacity: 0 }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -82,7 +82,7 @@ export default function AquaCityPhase2() {
               Kino na jezeru —<br /><span style={{ fontWeight: 600 }}>pod otvorenim nebom</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['LED ekran na vodi', 'Filmovi, sport i događanja', 'Večernji boravak na jezeru', 'Novo iskustvo za građane i posjetitelje'].map((item) => (
+              {['LED ekran na vodi', 'Filmovi, sport i događanja', 'Večernji boravak na jezeru', 'Razlog za večernji izlaz uz jezero'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',

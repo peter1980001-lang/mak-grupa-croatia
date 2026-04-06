@@ -124,6 +124,13 @@ export default function StaticSlide({ id, zIndex, height = '150vh', bg = '#0f2a2
           )
         })}
 
+        {/* Subtle ambient lake glow — differentiates static from black */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse 60% 48% at 50% 50%, rgba(61,143,163,0.04) 0%, transparent 100%)',
+          pointerEvents: 'none',
+        }} />
+
         <div style={{
           position: 'relative',
           zIndex: 1,

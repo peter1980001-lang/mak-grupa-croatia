@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import logoSrc from '../assets/logo.jpeg'
+import logoSrc from '../assets/logo_free.png'
 
 export default function HeroScroll() {
   const containerRef   = useRef(null)

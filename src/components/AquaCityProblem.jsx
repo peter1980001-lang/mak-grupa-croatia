@@ -49,8 +49,8 @@ export default function AquaCityProblem() {
           background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%)',
         }} />
 
-        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '50%', left: '8%', transform: 'translateY(-50%)', maxWidth: '540px', opacity: 0 }}>
-          <GlassBox style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
+        <div ref={cardRef} className="slide-card" style={{ position: 'absolute', top: '35%', left: '8%', transform: 'translateY(-50%)', maxWidth: '540px', opacity: 0 }}>
+          <GlassBox teal style={{ borderRadius: '16px', padding: '2rem 2.4rem' }}>
             <p style={{
               color: '#c8a96a', fontSize: 'clamp(0.65rem, 1vw, 0.8rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 400,
@@ -65,7 +65,7 @@ export default function AquaCityProblem() {
               <span style={{ fontWeight: 600 }}>Potencijal nije iskorišten.</span>
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.8rem 0' }}>
-              {['Aktivnost ograničena na obalu', 'Jezero nema aktivnu ulogu', 'Kratki boravci, mala potrošnja'].map((item) => (
+              {['Aktivnost ograničena na obalu', 'Jezero nema aktivnu ulogu'].map((item) => (
                 <li key={item} style={{
                   color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
@@ -74,14 +74,22 @@ export default function AquaCityProblem() {
                   <span style={{ color: '#c8a96a', fontSize: '0.6em' }}>■</span>{item}
                 </li>
               ))}
+              <li style={{
+                color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, marginBottom: '0.65rem',
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+              }}>
+                <span style={{ color: '#c8a96a', fontSize: '0.6em' }}>■</span>
+                Prosječan boravak: samo <span style={{ color: '#3d8fa3', fontWeight: 500 }}>2,2 noći</span>
+              </li>
             </ul>
             <p style={{
               color: 'rgba(245,243,234,0.92)', fontSize: 'clamp(1rem, 1.8vw, 1.3rem)',
               fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, letterSpacing: '0.05em',
               borderTop: '1px solid rgba(200,169,106,0.4)', paddingTop: '1rem', margin: 0,
             }}>
-              Lokacija je snaga —{' '}
-              <span style={{ color: '#c8a96a', fontWeight: 500 }}>iskorištenje je slabost</span>
+              Kontinentalna Hrvatska: 6% ukupnih turističkih noćenja —{' '}
+              <span style={{ color: '#c8a96a', fontWeight: 500 }}>jezero ne doprinosi ništa</span>
             </p>
           </GlassBox>
         </div>
