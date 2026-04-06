@@ -305,20 +305,20 @@ export default function HomePage() {
       ══════════════════════════════════════════════════════════════════════ */}
       <StaticSlide id="static-nextstep" zIndex={17} height="480vh">
         <GlassBox style={{ maxWidth: '640px', textAlign: 'center', padding: '3rem 3.5rem' }}>
-          <p style={T.label}>Sljedeći korak</p>
+          <p style={T.label}>Slijedeći korak</p>
           <h2 style={{ ...T.h2, fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '1.2rem' }}>
-            Pokretanje<br />
-            <span style={T.gold}>Faze 1</span>
+            Usklađivanje<br />
+            <span style={T.gold}>smjera</span>
           </h2>
           <p style={{ ...T.body, marginBottom: '1.8rem', fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: 'rgba(245,243,234,0.85)' }}>
-            Ako postoji usklađenost oko vizije — sljedeći korak je Faza 1
+            Ako se postigne usklađenost oko vizije —<br />definiramo mogućnost prvog koraka
           </p>
           <ul style={{ padding: 0, margin: '0 0 1.6rem 0', textAlign: 'left' }}>
-            {['Ograničeno i kontrolirano', 'Bez dugoročne obveze', 'Temelj za daljnje odluke'].map(t => <Bullet key={t}>{t}</Bullet>)}
+            {['Faza 1', 'Operativni i lokalni uvjeti', 'Razgovor s relevantnim dionicima'].map(t => <Bullet key={t}>{t}</Bullet>)}
           </ul>
           <div style={T.divider} />
           <p style={{ ...T.body, color: '#c8a96a', fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)', fontWeight: 400, margin: 0 }}>
-            Donosi se odluka o prvom koraku — ne o cijelom projektu
+            Donosi se odluka o smjeru — ne o implementaciji.
           </p>
         </GlassBox>
       </StaticSlide>
