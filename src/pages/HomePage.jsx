@@ -343,12 +343,12 @@ export default function HomePage() {
 
           <GlassBox style={{ width: '100%', textAlign: 'center', padding: '2.4rem 3rem' }}>
             <p style={T.label}>Zaključak</p>
-            <h2 style={{ ...T.h2, fontSize: 'clamp(1.8rem, 3.2vw, 2.8rem)', marginBottom: '1.4rem' }}>
-              AquaCity postaje ključna točka<br />
-              <span style={T.gold}>razvoja Varaždina</span>
+            <h2 style={{ ...T.h2, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', marginBottom: '1.6rem' }}>
+              AquaCity postaje mjesto gdje ljudi provode više vremena —<br />
+              <span style={T.gold}>danju, noću i kroz cijelu godinu</span>
             </h2>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', marginBottom: '1.8rem' }}>
-              {['Fazan', 'Kontroliran', 'Financijski održiv'].map(t => (
+              {['Fazni razvoj.', 'Potpuna kontrola Grada.', 'Privatno financiranje.'].map(t => (
                 <div key={t} style={{ textAlign: 'center' }}>
                   <span style={{ color: '#c8a96a', fontSize: '1rem', display: 'block', marginBottom: '0.3rem' }}>◈</span>
                   <p style={{ color: 'rgba(245,243,234,0.75)', fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 300, margin: 0 }}>{t}</p>
